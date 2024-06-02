@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import User from '../models/User.js'
+import jwt from 'jsonwebtoken'
 
 export const authTest=(req,res)=>{
     res.send("Auth test")

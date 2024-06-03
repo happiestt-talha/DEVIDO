@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import connectDB from "./db.js";
 
 import authRoute from './routes/Auth.js'
@@ -14,14 +15,18 @@ const host=process.env.HOST || "http://localhost"
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
     origin:[process.env.FE_URL,"http://localhost:3000"],
     methods:["GET","POST","PUT","DELETE"],
     credentials:true
 }));
+
+
 app.get('/', (req, res) => {
     res.send('Welcome to Devido')
 })
+
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
 app.use('/api/video', videoRoute);

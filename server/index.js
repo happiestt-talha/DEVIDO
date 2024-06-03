@@ -11,13 +11,15 @@ import cors from 'cors'
 
 const port=process.env.PORT || 5000
 const host=process.env.HOST || "http://localhost"
+const feUrl= "https://devido.vercel.app"
+// const feUrl=process.env.FE_URL|| "https://devido.vercel.app"
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:[process.env.FE_URL,"http://localhost:3000"],
+    origin:[feUrl,"http://localhost:3000","https://api-devido.vercel.app"],
     methods:["GET","POST","PUT","DELETE"],
     credentials:true
 }));

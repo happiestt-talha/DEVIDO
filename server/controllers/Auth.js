@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt'
 import { createError } from '../error.js'
 let success = false
 
+const JWT_ACCESS_KEY='1ffb1d01c12d993ad7afa2144d6af34ae2d6eeaa6f'
+
 export const authTest = (req, res) => {
     res.send("Auth test")
 }
@@ -34,7 +36,8 @@ export const login = async (req, res, next) => {
         const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
         if (!isPasswordCorrect) return next(createError(401, "Illegal credentials"))
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_KEY)
+        // const token = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_KEY)
+        const token = jwt.sign({ id: user._id }, JWT_ACCESS_KEY)
         const {password,...others}=user._doc
         success = true
 

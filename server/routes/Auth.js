@@ -4,6 +4,7 @@ const router = express.Router()
 
 //! TEST ROUTE
 router.get('/test', authTest)
+router.post('/test', authTest)
 
 //TODO: sign up
 router.post('/signup',signup)

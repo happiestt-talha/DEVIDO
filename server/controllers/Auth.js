@@ -9,6 +9,8 @@ const JWT_ACCESS_KEY='1ffb1d01c12d993ad7afa2144d6af34ae2d6eeaa6f'
 
 export const authTest = (req, res) => {
     res.send("Auth test")
+    console.log('Auth test')
+    console.log('Req body: ', req.body)
 }
 
 export const signup = async (req, res, next) => {

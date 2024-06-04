@@ -6,10 +6,10 @@ const router = express.Router()
 router.get('/test', authTest)
 router.post('/test', authTest)
 
-//TODO: sign up
+//? sign up
 router.post('/signup',signup)
 
-//TODO: sign in
+//? sign in
 router.post('/login',login)
 
 //TODO: Google

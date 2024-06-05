@@ -14,8 +14,8 @@ export const userTest = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
     try {
         // get user from cookies
-        // const token = req.cookies.accessToken
-        res.json({"req body: ": req.body, "user": req.user,"Params: ": req.params})
+        const token = req.headers
+        res.json({"req body: ": req.body, "user": req.user,"Params: ": req.params,token:token})
     } catch (error) {
         next(createError(404, "User not found"))
     }

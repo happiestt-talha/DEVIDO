@@ -6,6 +6,7 @@ import { createError } from '../error/error.js'
 let success = false
 
 const JWT_ACCESS_KEY='1ffb1d01c12d993ad7afa2144d6af34ae2d6eeaa6f'
+const authKey='qwedcsdbcidisjkcnb'
 
 export const authTest = (req, res) => {
     res.send("Auth test")
@@ -39,17 +40,18 @@ export const login = async (req, res, next) => {
         if (!isPasswordCorrect) return next(createError(401, "Illegal credentials"))
 
         // const token = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_KEY)
-        const token = jwt.sign({ id: user._id }, JWT_ACCESS_KEY)
+        // const token = jwt.sign({ id: user._id }, JWT_ACCESS_KEY)
+        const token = jwt.sign({ id: user._id }, authKey)
         const {password,...others}=user._doc
         success = true
 
         res
-            .cookie("accesToken", token, {
+            .cookie("accessToken", token, {
                 httpOnly: true
             })
             .status(200)
             .json({ success, ...others })
     } catch (err) {
-
+        next(createError(401,err.message))
     }
 }

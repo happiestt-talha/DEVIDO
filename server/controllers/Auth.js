@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import User from '../models/User.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { createError } from '../error.js'
+import { createError } from '../error/error.js'
 let success = false
 
 const JWT_ACCESS_KEY='1ffb1d01c12d993ad7afa2144d6af34ae2d6eeaa6f'

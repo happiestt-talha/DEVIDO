@@ -1,5 +1,6 @@
 import { createError } from '../error/error.js'
-
+import User from '../models/User.js'
+let success = false
 export const userTest = async (req, res, next) => {
     try {
         res.json({ msg: "User test", body: req.body })
@@ -13,24 +14,49 @@ export const userTest = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
     try {
-        // get user from cookies
-        const token = req.headers
-        res.json({"req body: ": req.body, "user": req.user,"Params: ": req.params,token:token})
+        if (req.params.id === req.user.id) {
+
+            const user = await User.findByIdAndUpdate(req.params.id,
+                { $set: req.body },
+                { new: true })
+            success = true
+
+            res.status(200).json({ success, ...user._doc })
+        } else {
+            next(createError(403, "You can update only your account"))
+        }
+
     } catch (error) {
-        next(createError(404, "User not found"))
+        next(createError(404, error.message))
     }
 }
 
 export const deleteUser = async (req, res, next) => {
-    res.send("Delete user")
-    console.log('Delete user')
-    console.log('Req body: ', req.body)
+    try {
+        if (req.params.id === req.user.id) {
+
+            const user = await User.findByIdAndDelete(req.params.id)
+            success = true
+
+            res.status(200).json({ success, ...user._doc })
+        } else {
+            next(createError(403, "You can Delete only your account"))
+        }
+
+    } catch (error) {
+        next(createError(404, error.message))
+    }
 }
 
 export const getUser = async (req, res, next) => {
-    res.send("Get user")
-    console.log('Get user')
-    console.log('Req body: ', req.body)
+    try {
+        const user = await User.findById(req.params.id)
+        success = true
+
+        res.status(200).json({ success, ...user._doc })
+    } catch (err) {
+        next(createError(404, err.message))
+    }
 }
 
 export const subscribeUser = async (req, res, next) => {

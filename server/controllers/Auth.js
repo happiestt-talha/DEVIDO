@@ -11,7 +11,7 @@ const authKey='qwedcsdbcidisjkcnb'
 export const authTest = (req, res) => {
     res.send("Auth test")
     console.log('Auth test')
-    console.log('Req body: ', req.body)
+    // console.log('Req body: ', req.body)
 }
 
 export const signup = async (req, res, next) => {
@@ -23,7 +23,7 @@ export const signup = async (req, res, next) => {
         await newUser.save()
         success = true
         res.status(200).json({ success, ...newUser._doc })
-        console.log('Res: ', res)
+        // console.log('Res: ', res)
         // console.log("New User: ",{ ...newUser-password})
     } catch (err) {
         next(err)

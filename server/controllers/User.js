@@ -60,15 +60,31 @@ export const getUser = async (req, res, next) => {
 }
 
 export const subscribeUser = async (req, res, next) => {
-    res.send("Subscribe user")
-    console.log('Subscribe user')
-    console.log('Req body: ', req.body)
+    try {
+        await User.findByIdAndUpdate(req.user.id, {
+            $push: { subscribedUsers: req.params.id }
+        })
+        await User.findByIdAndUpdate(req.params.id, {
+            $inc: { subscribers: 1 }
+        })
+        res.json("Subscription successful")
+    } catch (err) {
+        next(createError(404, err.message))
+    }
 }
 
 export const unsubscribeUser = async (req, res, next) => {
-    res.send("Unsubscribe user")
-    console.log('Unsubscribe user')
-    console.log('Req body: ', req.body)
+    try {
+        await User.findByIdAndUpdate(req.user.id, {
+            $pull: { subscribedUsers: req.params.id }
+        })
+        await User.findByIdAndUpdate(req.params.id, {
+            $inc: { subscribers: -1 }
+        })
+        res.json("Unsubscription successful")
+    } catch (err) {
+        next(createError(404, err.message))
+    }
 }
 
 export const likeVideo = async (req, res, next) => {

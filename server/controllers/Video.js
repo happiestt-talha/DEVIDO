@@ -1,5 +1,6 @@
 import { createError } from '../error/error.js'
 import Video from '../models/Video.js'
+import User from '../models/User.js'
 let success = false
 export const videoTest = (req, res) => {
     res.send("Video test")
@@ -54,5 +55,50 @@ export const getVideo = async (req, res, next) => {
         res.status(200).json({ success, ...video._doc })
     } catch (err) {
         next(createError(404, err.message))
+    }
+}
+
+export const addView = async (req, res, next) => {
+    try {
+        await Video.findByIdAndUpdate(req.params.id, {
+            $inc: { views: 1 }
+        })
+
+        res.status(200).json("The view has been increased")
+    } catch (error) {
+        next(createError(403, error.message))
+    }
+}
+
+export const getTrend = async (req, res, next) => {
+    try {
+        const videos = Video.find().sort({ views: -1 })
+        res.status(200).json(videos)
+    } catch (error) {
+        next(createError(403, error.message))
+    }
+}
+
+export const getRandom = async (req, res, next) => {
+    try {
+        const videos = Video.aggregate([{ $sample: { size: 40 } }])
+        res.status(200).json(videos)
+    } catch (error) {
+
+    }
+}
+
+export const getSub = async (req, res, next) => {
+    try {
+        const user = User.findById(req.user.id)
+        const subscribedChannel = user.subscribedUsers
+        const list = await Promise.all(
+            subscribedChannel.map(async (channelId) => {
+                return await Video.find({ userId: channelId })
+            })
+        )
+        res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt))
+    } catch (error) {
+
     }
 }

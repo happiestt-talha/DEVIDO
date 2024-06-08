@@ -102,3 +102,28 @@ export const getSub = async (req, res, next) => {
 
     }
 }
+
+export const getByTag = async (req, res, next) => {
+    try {
+        const tags = req.query.tags.split(',')
+
+        const videos = await Video.find({ tags: { $in: tags } })
+
+        res.status(200).json(videos)
+        res.json({ query })
+    } catch (err) {
+        next(createError(403, err.message))
+    }
+}
+
+export const search = async (req, res, next) => {
+    try {
+        const searchQuery = req.query.q
+        const videos = await Video.find({
+            title: { $regex: searchQuery, $options: 'i' }
+        })
+        res.status(200).json(videos)
+    } catch (error) {
+        next(createError(403, err.message))
+    }
+}

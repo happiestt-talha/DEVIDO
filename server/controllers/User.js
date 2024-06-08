@@ -88,9 +88,11 @@ export const unsubscribeUser = async (req, res, next) => {
 }
 
 export const likeVideo = async (req, res, next) => {
-    res.send("Like video")
-    console.log('Like video')
-    console.log('Req body: ', req.body)
+    try {
+
+    } catch (err) {
+        next(createError(403, err.message))
+    }
 }
 
 export const dislikeVideo = async (req, res, next) => {

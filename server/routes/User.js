@@ -27,6 +27,5 @@ router.put('/unsub/:id',verifyUser, unsubscribeUser)
 router.put('/like/:videoId',verifyUser, likeVideo)
 
 //dislike video
-
 router.put('/dislike/:videoId',verifyUser, dislikeVideo)
 export default router

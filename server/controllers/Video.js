@@ -81,10 +81,10 @@ export const getTrend = async (req, res, next) => {
 
 export const getRandom = async (req, res, next) => {
     try {
-        const videos = Video.aggregate([{ $sample: { size: 40 } }])
-        res.status(200).json(videos)
+        const video = await Video.aggregate([{ $sample: { size: 40 } }])
+        res.status(200).json(video)
     } catch (error) {
-
+        next(createError(403, error.message))
     }
 }
 

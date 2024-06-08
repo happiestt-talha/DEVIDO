@@ -1,5 +1,6 @@
 import { createError } from '../error/error.js'
 import User from '../models/User.js'
+import Video from '../models/Video.js'
 let success = false
 export const userTest = async (req, res, next) => {
     try {
@@ -89,14 +90,52 @@ export const unsubscribeUser = async (req, res, next) => {
 
 export const likeVideo = async (req, res, next) => {
     try {
+        const userId = req.user.id;
+        const videoId = req.params.videoId;
 
+        const user = await User.findById(userId);
+        if (!user) {
+            return next(createError(404, 'User not found'));
+        }
+
+        const video = await Video.findById(videoId);
+        if (!video) {
+            return next(createError(404, 'Video not found'));
+        }
+
+        await Video.findByIdAndUpdate(videoId, {
+            $addToSet: { likes: userId },
+            $pull: { dislikes: userId }
+        })
+
+        res.status(200).json("The video has been liked")
     } catch (err) {
         next(createError(403, err.message))
     }
 }
 
 export const dislikeVideo = async (req, res, next) => {
-    res.send("Dislike video")
-    console.log('Dislike video')
-    console.log('Req body: ', req.body)
+    try {
+        const userId = req.user.id;
+        const videoId = req.params.videoId;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return next(createError(404, 'User not found'));
+        }
+
+        const video = await Video.findById(videoId);
+        if (!video) {
+            return next(createError(404, 'Video not found'));
+        }
+
+        await Video.findByIdAndUpdate(videoId, {
+            $addToSet: { dislikes: userId },
+            $pull: { likes: userId }
+        })
+
+        res.status(200).json("The video has been disiked")
+    } catch (err) {
+        next(createError(403, err.message))
+    }
 }

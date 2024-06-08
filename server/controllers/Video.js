@@ -91,6 +91,9 @@ export const getRandom = async (req, res, next) => {
 export const getSub = async (req, res, next) => {
     try {
         const user = User.findById(req.user.id)
+        if (!user) {
+            return next(createError(404, 'User not found'));
+        }
         const subscribedChannel = user.subscribedUsers
         const list = await Promise.all(
             subscribedChannel.map(async (channelId) => {
@@ -99,7 +102,7 @@ export const getSub = async (req, res, next) => {
         )
         res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt))
     } catch (error) {
-
+        next(createError(403, error.message))
     }
 }
 

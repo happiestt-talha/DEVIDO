@@ -4,7 +4,12 @@ import Navbar from './components/Navbar'
 
 const Container = styled.div`
   display: flex;
-  `
+  width: 100vw;
+`
+
+const Main = styled.div`
+  flex:7;
+`
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,10 +19,12 @@ function App() {
   return (
     <Container >
       <Menu />
-      <Wrapper>
-        <Navbar />
-        Card items
-      </Wrapper>
+      <Main>
+        <Wrapper>
+          <Navbar />
+          Card items
+        </Wrapper>
+      </Main>
     </Container>
   );
 }

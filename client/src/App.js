@@ -12,8 +12,11 @@ const Main = styled.div`
 `
 
 const Wrapper = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #202020;
+  color: aliceblue;
 `
 function App() {
   return (

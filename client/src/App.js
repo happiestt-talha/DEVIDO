@@ -1,6 +1,10 @@
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import styled from 'styled-components'
 import Menu from './components/Menu'
 import Navbar from './components/Navbar'
+import Home from './components/Home'
 
 const Container = styled.div`
   display: flex;
@@ -20,15 +24,19 @@ const Wrapper = styled.div`
 `
 function App() {
   return (
-    <Container >
-      <Menu />
-      <Main>
-        <Wrapper>
-          <Navbar />
-          Card items
-        </Wrapper>
-      </Main>
-    </Container>
+    <BrowserRouter>
+      <Container >
+        <Menu />
+        <Main>
+          <Wrapper>
+            <Navbar />
+            <Routes>
+              <Route exact path='/' element={<Home />} />
+            </Routes>
+          </Wrapper>
+        </Main>
+      </Container>
+    </BrowserRouter>
   );
 }
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { IoHomeSharp, IoCompass,IoGameController ,IoNewspaperSharp,IoSettings,IoHelpCircleSharp} from "react-icons/io5";
-import { MdSubscriptions,MdVideoLibrary,MdHistory,MdOutlineSportsBasketball ,MdLibraryMusic,MdLiveTv,MdFlag} from "react-icons/md";
+import { Link } from 'react-router-dom'
+import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp } from "react-icons/io5";
+import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
 import { CgDarkMode } from "react-icons/cg";
 import logo from '../images/logo.png'
@@ -60,58 +61,58 @@ const Menu = () => {
     },
     {
       title: "Subscription",
-      icon:<MdSubscriptions/>
+      icon: <MdSubscriptions />
     },
     {
-      title:"Library",
-      icon:<MdVideoLibrary/>
+      title: "Library",
+      icon: <MdVideoLibrary />
     },
     {
-      title:"History",
-      icon:<MdHistory/>
+      title: "History",
+      icon: <MdHistory />
     },
     {
-      title:"Music",
-      icon:<MdLibraryMusic/>
+      title: "Music",
+      icon: <MdLibraryMusic />
     },
     {
-      title:"Sports",
-      icon:<MdOutlineSportsBasketball/>
+      title: "Sports",
+      icon: <MdOutlineSportsBasketball />
     },
     {
-      title:"Gaming",
-      icon:<IoGameController/>
+      title: "Gaming",
+      icon: <IoGameController />
     },
     {
-      title:"News",
-      icon:<IoNewspaperSharp/>
+      title: "News",
+      icon: <IoNewspaperSharp />
     },
     {
-      title:"Movies",
-      icon:<BiSolidMovie/>
+      title: "Movies",
+      icon: <BiSolidMovie />
     },
     {
-      title:"Live",
-      icon:<MdLiveTv/>
+      title: "Live",
+      icon: <MdLiveTv />
     },
     {
-      title:"Settings",
-      icon:<IoSettings/>
+      title: "Settings",
+      icon: <IoSettings />
     },
     {
-      title:"Report",
-      icon:<MdFlag/>
+      title: "Report",
+      icon: <MdFlag />
     },
     {
-      title:"Help",
-      icon:<IoHelpCircleSharp/>
+      title: "Help",
+      icon: <IoHelpCircleSharp />
     },
     {
-      title:"Switch mode",
-      icon:<CgDarkMode/>
+      title: "Switch mode",
+      icon: <CgDarkMode />
     },
   ]
-  
+
   return (
     <Conntainer>
       <Wrapper>
@@ -122,8 +123,10 @@ const Menu = () => {
         {
           navMenu.map((item, index) => (
             <Item key={index}>
+              <Link to={`/${item.title.toLowerCase()}`}>
               {item.icon}
               {item.title}
+              </Link>
             </Item>
           ))
         }

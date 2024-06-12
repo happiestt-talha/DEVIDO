@@ -49,6 +49,13 @@ const Item = styled.div`
   }
 `
 
+const HR = styled.hr`
+  height: 1px;
+  /* border: 0.5px solid rgba(255, 255, 255, 0.5); */
+  background-color:rgba(255, 255, 255, 0.5); ;
+  margin: 15px 0; 
+
+`
 const Menu = () => {
   const navMenu = [
     {
@@ -122,12 +129,16 @@ const Menu = () => {
         </Logo>
         {
           navMenu.map((item, index) => (
-            <Item key={index}>
-              <Link to={`/${item.title.toLowerCase()}`}>
-              {item.icon}
-              {item.title}
+            <div key={index}>
+              <Link to={`/${item.title.toLowerCase()}`} key={index} style={{ textDecoration: "none", color: "none" }}>
+                <Item>
+                  {item.icon}
+                  {item.title}
+                </Item>
               </Link>
-            </Item>
+
+              {(index === 5) && <HR />}
+            </div>
           ))
         }
       </Wrapper>

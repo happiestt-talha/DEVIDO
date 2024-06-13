@@ -5,13 +5,13 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp, IoMdAdd } from "react-icons/io5";
 import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
-import { CgDarkMode } from "react-icons/cg";
+import { CgDarkMode, CgLogOff } from "react-icons/cg";
 import logo from '../images/logo.png'
 
 const Container = styled.div`
   flex: 1.3;
-  background-color: black;
-  color: aliceblue;
+  background-color:${({ theme }) => theme.bg};
+  color: ${({ theme }) => theme.text};
   height: 100vh;
 
   overflow-y: scroll;
@@ -48,10 +48,10 @@ const Item = styled.div`
   gap: 1.2rem;
   cursor: pointer;
   font-size: 1.2rem;
-  color: white;
+  color: ${({ theme }) => theme.text};
   padding: .6rem;
   &:hover{
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: ${({ theme }) => theme.bgLighter};
     /* background-color: hsla(0, 0%, 00%, 0.3); */
   }
 `
@@ -59,7 +59,7 @@ const Item = styled.div`
 const HR = styled.hr`
   height: 1px;
   /* border: 0.5px solid rgba(255, 255, 255, 0.5); */
-  background-color:rgba(255, 255, 255, 0.5); ;
+  background-color:${({ theme }) => theme.soft}; ;
   margin: 15px 0; 
 
 `
@@ -70,7 +70,7 @@ const LoginSec = styled.div`
   gap: 1.2rem;
   cursor: pointer;
   font-size: 1.2rem;
-  color: white;
+  color: ${({ theme }) => theme.text};
   padding: .6rem;
   
   /* &:hover{
@@ -98,7 +98,7 @@ const Button = styled.button`
   }
 `
 
-const Menu = () => {
+const Menu = ({ darkMode, setDarkMode }) => {
 
   const navMainItems = [
     {
@@ -161,10 +161,6 @@ const Menu = () => {
       title: "Help",
       icon: <IoHelpCircleSharp />
     },
-    {
-      title: "Switch mode",
-      icon: <CgDarkMode />
-    },
   ]
 
   return (
@@ -209,6 +205,15 @@ const Menu = () => {
             </Item>
           ))
         }
+        <Item>
+          <CgDarkMode />
+          <span onClick={() => setDarkMode(!darkMode)}>{darkMode ? "Light" : "Dark"} Mode</span>
+        </Item>
+        <HR />
+        <Item>
+          <CgLogOff />
+          Log Out
+        </Item>
       </Wrapper>
     </Container>
   )

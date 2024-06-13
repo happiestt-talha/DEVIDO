@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import styled from 'styled-components'
+import { darkTheme, lightTheme } from './utils/Theme.js'
+import styled, { ThemeProvider } from 'styled-components'
 import Menu from './components/Menu'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
@@ -23,19 +24,22 @@ const Wrapper = styled.div`
   color: aliceblue;
 `
 function App() {
+  const [darkMode, setDarkMode] = useState(true)
   return (
     <BrowserRouter>
-      <Container >
-        <Menu />
-        <Main>
-          <Wrapper>
-            <Navbar />
-            <Routes>
-              <Route exact path='/' element={<Home />} />
-            </Routes>
-          </Wrapper>
-        </Main>
-      </Container>
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <Container >
+          <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Main>
+            <Wrapper>
+              <Navbar />
+              <Routes>
+                <Route exact path='/' element={<Home />} />
+              </Routes>
+            </Wrapper>
+          </Main>
+        </Container>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

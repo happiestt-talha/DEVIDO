@@ -2,18 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FaRegUserCircle } from "react-icons/fa";
-import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp, IoMdAdd } from "react-icons/io5";
+import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp } from "react-icons/io5";
 import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
 import { CgDarkMode, CgLogOff } from "react-icons/cg";
 import logo from '../images/logo.png'
 
-const Container = styled.div`
+const NavContainer = styled.div`
   flex: 1.3;
   background-color:${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text};
   height: 100vh;
-
+  position: sticky;
+  top: 0;
   overflow-y: scroll;
 
   &::-webkit-scrollbar{
@@ -26,7 +27,7 @@ const Container = styled.div`
 
 `
 
-const Wrapper = styled.div`
+const NavWrapper = styled.div`
   padding: 20px 10px;
 
 `
@@ -163,9 +164,15 @@ const Menu = ({ darkMode, setDarkMode }) => {
     },
   ]
 
+  const handleOnlick = () => {
+    console.log('Mode changed')
+    setDarkMode(!darkMode)
+    console.log('Mode: ', darkMode)
+  }
+
   return (
-    <Container>
-      <Wrapper>
+    <NavContainer>
+      <NavWrapper>
         <Logo>
           <Img src={logo} />
           <span>Devido</span>
@@ -180,6 +187,11 @@ const Menu = ({ darkMode, setDarkMode }) => {
             </Link>
           ))
         }
+        <HR />
+        <Item>
+          <CgDarkMode />
+          <span onClick={handleOnlick}> {darkMode ? "Light" : "Dark"} Mode</span>
+        </Item>
         <HR />
         <LoginSec>
           <p>Log in to like, comment, and subscribe</p>
@@ -205,17 +217,14 @@ const Menu = ({ darkMode, setDarkMode }) => {
             </Item>
           ))
         }
-        <Item>
-          <CgDarkMode />
-          <span onClick={() => setDarkMode(!darkMode)}>{darkMode ? "Light" : "Dark"} Mode</span>
-        </Item>
+
         <HR />
         <Item>
           <CgLogOff />
           Log Out
         </Item>
-      </Wrapper>
-    </Container>
+      </NavWrapper>
+    </NavContainer >
   )
 }
 

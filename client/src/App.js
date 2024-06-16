@@ -20,27 +20,29 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #202020;
-  color: aliceblue;
+  background-color: ${({ theme }) => theme.bgLighter};
+  color: ${({ theme }) => theme.text};
 `
 function App() {
   const [darkMode, setDarkMode] = useState(true)
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <Container >
-          <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
-          <Main>
-            <Wrapper>
-              <Navbar />
-              <Routes>
-                <Route exact path='/' element={<Home />} />
-              </Routes>
-            </Wrapper>
-          </Main>
-        </Container>
-      </ThemeProvider>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+          <Container >
+            <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+            <Main>
+              <Wrapper>
+                <Navbar />
+                <Routes>
+                  <Route exact path='/' element={<Home />} />
+                </Routes>
+              </Wrapper>
+            </Main>
+          </Container>
+        </ThemeProvider>
+      </BrowserRouter>
+    </>
   );
 }
 

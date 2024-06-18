@@ -98,6 +98,11 @@ const Button = styled.button`
     box-shadow: 0 0 10px 5px #3ea6ff;
   }
 `
+const Title = styled.h2`
+  font-size: 1.2rem;
+  font-weight: 500; 
+  color:#aaaaaa
+`
 
 const Menu = ({ darkMode, setDarkMode }) => {
 
@@ -200,6 +205,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
           </Button>
         </LoginSec>
         <HR />
+        <Title>Best of Devido</Title>
         {
           navCatItems.map((item, index) => (
             <Item key={index}>

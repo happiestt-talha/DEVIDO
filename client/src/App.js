@@ -25,6 +25,7 @@ const Wrapper = styled.div`
 `
 function App() {
   const [darkMode, setDarkMode] = useState(true)
+  const [text, setText] = useState('Use Search to view text here')
   return (
     <>
       <BrowserRouter>
@@ -33,9 +34,9 @@ function App() {
             <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
             <Main>
               <Wrapper>
-                <Navbar />
+                <Navbar text={text} setText={setText} />
                 <Routes>
-                  <Route exact path='/' element={<Home />} />
+                  <Route exact path='/' element={<Home text={text} />} />
                 </Routes>
               </Wrapper>
             </Main>

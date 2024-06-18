@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { RiAccountPinCircleFill } from "react-icons/ri";
+
 const Container = styled.div`
   position: sticky;
   top: 0;
@@ -52,12 +53,16 @@ const Button = styled.button`
   align-items: center;
   gap: 5px;
 `;
-const Navbar = () => {
+const Navbar = ({text,setText}) => {
+  const handleOnchange = (e) => {
+    console.log(e.target.value)
+    setText(e.target.value)
+  };
   return (
     <Container>
       <Wrapper>
         <Search>
-          <Input placeholder="Search" />
+          <Input placeholder="Search" onChange={handleOnchange} />
           <IoSearchSharp/>
         </Search>
         <Link to="signin" style={{ textDecoration: "none" }}>

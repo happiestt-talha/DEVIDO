@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FaRegUserCircle } from "react-icons/fa";
-import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp } from "react-icons/io5";
-import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag } from "react-icons/md";
+import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp, IoVideocamOffOutline } from "react-icons/io5";
+import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag, MdVideoCall } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
 import { CgDarkMode, CgLogOff } from "react-icons/cg";
 import logo from '../images/logo.png'
@@ -37,6 +37,8 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   gap: .5rem;
+  cursor: pointer;
+  color: ${({ theme }) => theme.text};
 `
 
 const Img = styled.img`
@@ -112,6 +114,10 @@ const Menu = ({ darkMode, setDarkMode }) => {
       icon: <IoHomeSharp />
     },
     {
+      title: "Video",
+      icon: <MdVideoCall />
+    },
+    {
       title: "Explore",
       icon: <IoCompass />
     },
@@ -178,10 +184,12 @@ const Menu = ({ darkMode, setDarkMode }) => {
   return (
     <NavContainer>
       <NavWrapper>
-        <Logo>
-          <Img src={logo} />
-          <span>Devido</span>
-        </Logo>
+        <Link to="/" style={{ textDecoration: "none", color: "none" }}>
+          <Logo>
+            <Img src={logo} />
+            <span>Devido</span>
+          </Logo>
+        </Link>
         {
           navMainItems.map((item, index) => (
             <Link to={`/${item.title.toLowerCase()}`} key={index} style={{ textDecoration: "none", color: "none" }}>

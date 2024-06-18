@@ -6,6 +6,8 @@ import styled, { ThemeProvider } from 'styled-components'
 import Menu from './components/Menu'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
+import Video from './pages/Video'
+import HomePage from './pages/Home'
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +38,12 @@ function App() {
               <Wrapper>
                 <Navbar text={text} setText={setText} />
                 <Routes>
-                  <Route exact path='/' element={<Home text={text} />} />
+                  <Route path='/'>
+                    <Route index element={<HomePage />} />
+                    <Route path='video'>
+                      <Route path=':id' element={<Video />} />
+                    </Route>
+                  </Route>
                 </Routes>
               </Wrapper>
             </Main>

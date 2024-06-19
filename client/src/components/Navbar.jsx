@@ -35,6 +35,7 @@ const Search = styled.div`
 `;
 
 const Input = styled.input`
+  width: 60%;
   border: none;
   background-color: transparent;
   outline: none;
@@ -55,6 +56,7 @@ const Button = styled.button`
 `;
 const Navbar = ({text,setText}) => {
   const handleOnchange = (e) => {
+    setText(" ")
     console.log(e.target.value)
     setText(e.target.value)
   };
@@ -62,7 +64,7 @@ const Navbar = ({text,setText}) => {
     <Container>
       <Wrapper>
         <Search>
-          <Input placeholder="Search" onChange={handleOnchange} />
+          <Input placeholder="Search" onChange={handleOnchange} value={text} />
           <IoSearchSharp/>
         </Search>
         <Link to="signin" style={{ textDecoration: "none" }}>

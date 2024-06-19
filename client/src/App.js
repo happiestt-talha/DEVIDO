@@ -1,58 +1,50 @@
-import React, { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-import { darkTheme, lightTheme } from './utils/Theme.js'
-import styled, { ThemeProvider } from 'styled-components'
-import Menu from './components/Menu'
-import Navbar from './components/Navbar'
-import Home from './components/Home'
-import Video from './pages/Video'
-import HomePage from './pages/Home'
+import { useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import Menu from "./components/Menu";
+import Navbar from "./components/Navbar";
+import { darkTheme, lightTheme } from "./utils/Theme";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Video from "./pages/Video";
+import SignIn from "./pages/SignIn";
 
 const Container = styled.div`
   display: flex;
-  width: 100vw;
-`
+`;
 
 const Main = styled.div`
-  flex:7;
-`
-
+  flex: 7;
+  background-color: ${({ theme }) => theme.bg};
+`;
 const Wrapper = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.bgLighter};
-  color: ${({ theme }) => theme.text};
-`
+  padding: 22px 96px;
+`;
+
 function App() {
-  const [darkMode, setDarkMode] = useState(true)
-  const [text, setText] = useState('Use Search to view text here')
+  const [darkMode, setDarkMode] = useState(true);
+
   return (
-    <>
-      <BrowserRouter>
-        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-          <Container >
-            <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
-            <Main>
-              <Wrapper>
-                <Navbar text={text} setText={setText} />
-                <Routes>
-                  <Route path='/'>
-                    <Route index element={<HomePage />} />
-                    <Route path='video'>
-                      <Route path=':id' element={<Video />} />
-                    </Route>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <Container>
+        <BrowserRouter>
+          <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Main>
+            <Navbar />
+            <Wrapper>
+              <Routes>
+                <Route path="/">
+                  <Route index element={<Home />} />
+                  <Route path="signin" element={<SignIn />} />
+                  <Route path="video">
+                    <Route path=":id" element={<Video />} />
                   </Route>
-                  <Route exact path='/home' element={<Home />} />
-                  <Route path='*' element={<Home />} />
-                </Routes>
-              </Wrapper>
-            </Main>
-          </Container>
-        </ThemeProvider>
-      </BrowserRouter>
-    </>
+                </Route>
+              </Routes>
+            </Wrapper>
+          </Main>
+        </BrowserRouter>
+      </Container>
+    </ThemeProvider>
   );
 }
 

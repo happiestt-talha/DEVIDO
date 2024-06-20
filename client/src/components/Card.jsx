@@ -1,78 +1,67 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
+import Dummy from '../images/Dummy.jpg'
+import Dummy2 from '../images/Dummy2.jpg'
 
 const Container = styled.div`
-    width: ${(props) => props.type !== "sm" && "360px"};
-    margin-bottom: ${(props) => (props.type === "sm" ? "10px" : "45px")};
+    width: 18rem;
+    height: 12rem;
+    background-color: ${({ theme }) => theme.bgLighter};
+    color: ${({ theme }) => theme.text};
     cursor: pointer;
-    display: ${(props) => props.type === "sm" && "flex"};
-    gap: 10px;
-`;
+`
 
 const Image = styled.img`
     width: 100%;
-  height: ${(props) => (props.type === "sm" ? "120px" : "202px")};
-  background-color: #999;
-    flex: 1;
-`;
+    height: 65%;
+    object-fit: cover;
+`
 
 const Details = styled.div`
     display: flex;
-    margin-top: ${(props) => props.type !== "sm" && "16px"};
-    gap: 12px;
-    flex: 1;
-`;
+    margin-top: .6rem;
+    gap: 1rem;
+    padding: 0 1rem;
+    align-items: center;
+`
 
 const ChannelImage = styled.img`
-    width: 36px;
-    height: 36px;
+    height: 2.5rem;
+    width: 2.5rem;
     border-radius: 50%;
-    background-color: #999;
-    display: ${(props) => props.type === "sm" && "none"};
-`;
+    background-color: beige;
+`
 
-const Texts = styled.div``;
+const Texts = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`
 
-const Title = styled.h1`
-    font-size: 16px;
-    font-weight: 500;
+const ChannelName = styled.h1`
     color: ${({ theme }) => theme.text};
-`;
+    font-size: .9rem;
+`
 
-const ChannelName = styled.h2`
-    font-size: 14px;
+const VideoData = styled.h2`
     color: ${({ theme }) => theme.textSoft};
-    margin: 9px 0px;
-`;
-
-const Info = styled.div`
-    font-size: 14px;
-    color: ${({ theme }) => theme.textSoft};
-`;
-
-const Card = ({ type }) => {
+    font-size: .8rem;
+`
+const Card = () => {
     return (
-        <Link to="/video/test" style={{ textDecoration: "none" }}>
-            <Container type={type}>
-                <Image
-                    type={type}
-                    src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA"
-                />
-                <Details type={type}>
-                    <ChannelImage
-                        type={type}
-                        src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo"
-                    />
+        <>
+            <Container>
+                <Image src={Dummy} />
+                <Details>
+                    <ChannelImage src={Dummy2} />
                     <Texts>
-                        <Title>Test Video</Title>
-                        <ChannelName>Lama Dev</ChannelName>
-                        <Info>660,908 views • 1 day ago</Info>
+                        <ChannelName>Dum Daba k Bhago</ChannelName>
+                        <VideoData>6 days ago . 765 views </VideoData>
                     </Texts>
                 </Details>
             </Container>
-        </Link>
-    );
-};
+        </>
+    )
+}
 
-export default Card;
+export default Card

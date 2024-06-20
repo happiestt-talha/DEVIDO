@@ -47,7 +47,7 @@ const Img = styled.img`
 
 const Item = styled.div`
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 1.2rem;
   cursor: pointer;
   font-size: 1.2rem;
@@ -111,27 +111,33 @@ const Menu = ({ darkMode, setDarkMode }) => {
   const navMainItems = [
     {
       title: "Home",
-      icon: <IoHomeSharp />
+      icon: <IoHomeSharp />,
+      link: '/'
     },
     {
       title: "Video",
-      icon: <MdVideoCall />
+      icon: <MdVideoCall />,
+      link: '/video/test'
     },
     {
       title: "Explore",
-      icon: <IoCompass />
+      icon: <IoCompass />,
+      link: '/explore'
     },
     {
       title: "Subscription",
-      icon: <MdSubscriptions />
+      icon: <MdSubscriptions />,
+      link: '/sub'
     },
     {
       title: "Library",
-      icon: <MdVideoLibrary />
+      icon: <MdVideoLibrary />,
+      link: '/library'
     },
     {
       title: "History",
-      icon: <MdHistory />
+      icon: <MdHistory />,
+      link: '/history'
     },
   ]
   const navCatItems = [
@@ -192,7 +198,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
         </Link>
         {
           navMainItems.map((item, index) => (
-            <Link to={`/${item.title.toLowerCase()}`} key={index} style={{ textDecoration: "none", color: "none" }}>
+            <Link to={item.link} key={index} style={{ textDecoration: "none", color: "none" }}>
               <Item>
                 {item.icon}
                 {item.title}

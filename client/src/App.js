@@ -37,7 +37,7 @@ function App() {
                 <Route path="/">
                   <Route index element={<Home />} />
                   <Route path="signin" element={<SignIn />} />
-                  <Route path="video">
+                  <Route path="video" element={<Video />}>
                     <Route path=":id" element={<Video />} />
                   </Route>
                 </Route>

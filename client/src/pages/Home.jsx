@@ -1,8 +1,45 @@
 import React from 'react'
+import styled from 'styled-components'
+import Card from '../components/Card'
 
+
+const Container = styled.div`
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+`
 const Home = () => {
   return (
-    <div>HomePage</div>
+    <>
+      <Container>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </Container>
+    </>
   )
 }
 

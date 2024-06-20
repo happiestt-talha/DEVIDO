@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Dummy from '../images/Dummy.jpg'
 import Dummy2 from '../images/Dummy2.jpg'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
     width: 18rem;
@@ -50,16 +51,18 @@ const VideoData = styled.h2`
 const Card = () => {
     return (
         <>
-            <Container>
-                <Image src={Dummy} />
-                <Details>
-                    <ChannelImage src={Dummy2} />
-                    <Texts>
-                        <ChannelName>Dum Daba k Bhago</ChannelName>
-                        <VideoData>6 days ago . 765 views </VideoData>
-                    </Texts>
-                </Details>
-            </Container>
+            <Link to="/video/test" style={{ textDecoration: "none", color: "inherit" }}>
+                <Container>
+                    <Image src={Dummy} />
+                    <Details>
+                        <ChannelImage src={Dummy2} />
+                        <Texts>
+                            <ChannelName>Dum Daba k Bhago</ChannelName>
+                            <VideoData>6 days ago . 765 views </VideoData>
+                        </Texts>
+                    </Details>
+                </Container>
+            </Link>
         </>
     )
 }

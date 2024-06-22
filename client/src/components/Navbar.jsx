@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
@@ -54,10 +54,11 @@ const Button = styled.button`
   align-items: center;
   gap: 5px;
 `;
-const Navbar = ({text,setText}) => {
+const Navbar = () => {
+  const [text, setText] = useState('')
   const handleOnchange = (e) => {
     setText(" ")
-    console.log(e.target.value)
+    console.log('Text: ', text)
     setText(e.target.value)
   };
   return (

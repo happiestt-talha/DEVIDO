@@ -1,6 +1,6 @@
 export const darkTheme = {
     bg: "#181818",
-    bgLighter: "#202020",
+    bgLighter: "#333333",
     text: "white",
     textSoft: "#aaaaaa",
     soft: "#373737"

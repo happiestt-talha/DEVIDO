@@ -18,7 +18,7 @@ const Main = styled.div`
 `;
 const Wrapper = styled.div`
   /* padding: 22px 96px; */
-  padding: 1rem 2rem;
+  padding: 1rem 1.2rem;
   display: flex;
 `;
 

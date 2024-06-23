@@ -5,16 +5,19 @@ import Dummy2 from '../images/Dummy2.jpg'
 import { Link } from 'react-router-dom'
 
 const Container = styled.div`
-    width: 18rem;
-    height: 12rem;
+    width: ${(props) => props.type === "sm" ? "16rem" : "18rem"};
+    height: ${(props) => (props.type === "sm" ? "10rem" : "12rem")};
+    margin-bottom: ${(props) => (props.type === "sm" ? "0.8rem" : "0.7rem")};
     background-color: ${({ theme }) => theme.bgLighter};
     color: ${({ theme }) => theme.text};
     cursor: pointer;
+    border-radius: 0.2rem;
 `
 
 const Image = styled.img`
     width: 100%;
-    height: 65%;
+    border-radius: 0.2rem;
+    height: ${(props) => (props.type === "sm" ? "65%" : "70%")};;
     object-fit: cover;
 `
 
@@ -22,7 +25,7 @@ const Details = styled.div`
     display: flex;
     margin-top: .6rem;
     gap: 1rem;
-    padding: 0 1rem;
+    padding: ${({ type }) => type !== "sm" && "0 .6rem"};
     align-items: center;
 `
 
@@ -48,12 +51,12 @@ const VideoData = styled.h2`
     color: ${({ theme }) => theme.textSoft};
     font-size: .8rem;
 `
-const Card = () => {
+const Card = ({type}) => {
     return (
         <>
             <Link to="/video/test" style={{ textDecoration: "none", color: "inherit" }}>
-                <Container>
-                    <Image src={Dummy} />
+                <Container type={type}>
+                    <Image src={Dummy} type={type} />
                     <Details>
                         <ChannelImage src={Dummy2} />
                         <Texts>

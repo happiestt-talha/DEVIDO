@@ -18,11 +18,14 @@ const Wrapper = styled.div`
   height: 100%;
   padding: 0px 20px;
   position: relative;
+
+  @media (max-width: 768px) {
+    justify-content: space-between;
+  }
 `;
 
 const Search = styled.div`
   width: 40%;
-  position: absolute;
   left: 0px;
   right: 0px;
   margin: auto;
@@ -32,6 +35,11 @@ const Search = styled.div`
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
+
+@media (max-width: 768px) {
+  margin: 0;
+
+}
 `;
 
 const Input = styled.input`

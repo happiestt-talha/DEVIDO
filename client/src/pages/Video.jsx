@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Comments from '../components/Comments'
+import Card from '../components/Card'
 import Dummy from '../images/Dummy.jpg'
 import { BiBookmarkPlus } from "react-icons/bi";
 import { FaShareSquare } from "react-icons/fa";
@@ -10,6 +11,7 @@ import { BiLike } from "react-icons/bi";
 const Container = styled.div`
   width: 100%;
   display: flex;
+  gap: 0.4rem;
   color: ${({ theme }) => theme.text};
 
   @media (max-width: 768px) {
@@ -21,6 +23,9 @@ const Content = styled.div`
 `
 const Reccomendation = styled.div`
   flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 `
 
 const VideoWrapper = styled.div`
@@ -119,7 +124,11 @@ const Subscribe = styled.button`
   padding: 10px 20px;
   cursor: pointer;
 `
-const Video = () => {
+const Video = (props) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Container>
@@ -133,40 +142,40 @@ const Video = () => {
               allowFullScreen
               frameBorder={0}
             ></iframe>
-            <Title>Tom and Jerry</Title>
-            <Details>
-              <Info>8,000,000 views • 1 day ago</Info>
-              <Buttons>
-                <Button>
-                  <BiLike /> Like
-                </Button>
-                <Button>
-                  <BiDislike /> Dislike
-                </Button>
-                <Button>
-                  <FaShareSquare /> Share
-                </Button>
-                <Button>
-                  <BiBookmarkPlus /> Save
-                </Button>
-              </Buttons>
-            </Details>
-            <HR />
-            <Channel>
-              <ChannelInfo>
-                <ChannelImage src={Dummy} />
-                <ChannelDetails>
-                  <ChannelName>Tom and Jerry</ChannelName>
-                  <ChannelCounter>200,000 subscribers</ChannelCounter>
-                  <Description>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui dicta voluptas quo quae quos sunt! Officiis placeat molestiae?
-                  </Description>
-                </ChannelDetails>
-              </ChannelInfo>
-              <Subscribe>Subscribe</Subscribe>
-            </Channel>
-            <HR />
           </VideoWrapper>
+          <Title>Tom and Jerry</Title>
+          <Details>
+            <Info>8,000,000 views • 1 day ago</Info>
+            <Buttons>
+              <Button>
+                <BiLike /> Like
+              </Button>
+              <Button>
+                <BiDislike /> Dislike
+              </Button>
+              <Button>
+                <FaShareSquare /> Share
+              </Button>
+              <Button>
+                <BiBookmarkPlus /> Save
+              </Button>
+            </Buttons>
+          </Details>
+          <HR />
+          <Channel>
+            <ChannelInfo>
+              <ChannelImage src={Dummy} />
+              <ChannelDetails>
+                <ChannelName>Tom and Jerry</ChannelName>
+                <ChannelCounter>200k subscribers</ChannelCounter>
+                <Description>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui dicta voluptas quo quae quos sunt! Officiis placeat molestiae?
+                </Description>
+              </ChannelDetails>
+            </ChannelInfo>
+            <Subscribe>Subscribe</Subscribe>
+          </Channel>
+          <HR />
           <>
             <Comments />
             <Comments />
@@ -191,7 +200,19 @@ const Video = () => {
           </>
         </Content>
         <Reccomendation>
-          Reccomendation
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
+          <Card type="sm" />
         </Reccomendation>
       </Container >
     </>

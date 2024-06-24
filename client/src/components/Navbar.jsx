@@ -7,7 +7,7 @@ import { RiAccountPinCircleFill } from "react-icons/ri";
 const Container = styled.div`
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.bgLighter};
+  background-color: ${({ theme }) => theme.soft};
   height: 56px;
 `;
 

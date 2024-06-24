@@ -22,7 +22,7 @@ const Content = styled.div`
   flex: 7;
 `
 const Reccomendation = styled.div`
-  flex: 2;
+  flex: 3;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -177,25 +177,6 @@ const Video = (props) => {
           </Channel>
           <HR />
           <>
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
-            <Comments />
             <Comments />
           </>
         </Content>

@@ -9,21 +9,25 @@ const Container = styled.div`
   margin-bottom: ${(props) => (props.type === "sm" ? "10px" : "45px")};
   cursor: pointer;
   display: ${(props) => props.type === "sm" && "flex"};
-  gap: 10px;
+  /* gap: 10px; */
 `;
 
 const Image = styled.img`
-  width: 100%;
+  /* width: 100%; */
+  width:  ${(props) => (props.type === "sm" ? "200px" : "100%")};
   height: ${(props) => (props.type === "sm" ? "120px" : "202px")};
   background-color: #999;
-  flex: 1;
+  flex: 6;
 `;
 
 const Details = styled.div`
   display: flex;
   margin-top: ${(props) => props.type !== "sm" && "16px"};
   gap: 12px;
-  flex: 1;
+  flex: 19;
+  padding:  ${(props) => (props.type === "sm" && "0px 8px" )};
+
+  /* background-color: ${(props) => props.type === "sm" && "red"}; ; */
 `;
 
 const ChannelImage = styled.img`

@@ -43,8 +43,8 @@ const Details = styled.div`
 const Title = styled.h1`
   font-size: 18px;
   font-weight: 400;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: .3rem;
+  margin-bottom: .2rem;
   color: ${({ theme }) => theme.text};
 `;
 const Info = styled.div`
@@ -127,10 +127,10 @@ const Subscribe = styled.button`
 
 const Iframe = styled.iframe`
   width: 100%;
-  height: 450rem;
+  height:28rem;
 
   @media (max-width: 768px) {
-    height: 200rem;
+    height: 20rem;
   }
 `
 const Video = (props) => {

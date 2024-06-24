@@ -124,6 +124,15 @@ const Subscribe = styled.button`
   padding: 10px 20px;
   cursor: pointer;
 `
+
+const Iframe = styled.iframe`
+  width: 100%;
+  height: 450rem;
+
+  @media (max-width: 768px) {
+    height: 200rem;
+  }
+`
 const Video = (props) => {
 
   useEffect(() => {
@@ -134,14 +143,12 @@ const Video = (props) => {
       <Container>
         <Content>
           <VideoWrapper>
-            <iframe
-              width="100%"
-              height="450rem"
+            <Iframe
               src="https://www.youtube.com/embed/id7qgnqIZtg?si=_bgPx6_13Uo7XUG3"
               title="YouTube video player"
               allowFullScreen
               frameBorder={0}
-            ></iframe>
+            ></Iframe>
           </VideoWrapper>
           <Title>Tom and Jerry</Title>
           <Details>

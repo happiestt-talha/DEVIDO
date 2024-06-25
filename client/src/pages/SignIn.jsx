@@ -56,6 +56,13 @@ const Button = styled.button`
   font-size: 1rem;
   cursor: pointer;
   margin-top: 1rem;
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #3ea6ff;
+    color: white;
+  }
 `
 const InputBox = styled.div`
   display: flex;

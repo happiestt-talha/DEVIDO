@@ -8,7 +8,7 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   background-color: ${({ theme }) => theme.soft};
-  height: 40px;
+  height: 2.3rem;
 `;
 
 const Wrapper = styled.div`

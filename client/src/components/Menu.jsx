@@ -52,7 +52,7 @@ const Item = styled.div`
   cursor: pointer;
   font-size: 1.2rem;
   color: ${({ theme }) => theme.text};
-  padding: .6rem;
+  padding: 0.4rem .6rem;
   &:hover{
     background-color: ${({ theme }) => theme.bgLighter};
     /* background-color: hsla(0, 0%, 00%, 0.3); */
@@ -63,18 +63,18 @@ const HR = styled.hr`
   height: 1px;
   /* border: 0.5px solid rgba(255, 255, 255, 0.5); */
   background-color:${({ theme }) => theme.soft}; ;
-  margin: 15px 0; 
+  margin: .5rem 0; 
 
 `
 const LoginSec = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
+  gap: .6rem;
   cursor: pointer;
   font-size: 1.2rem;
   color: ${({ theme }) => theme.text};
-  padding: .6rem;
+  padding: 0.4rem .6rem;
   
   /* &:hover{
     background-color: rgba(255, 255, 255, 0.5);
@@ -214,9 +214,11 @@ const Menu = ({ darkMode, setDarkMode }) => {
         <HR />
         <LoginSec>
           <p>Log in to like, comment, and subscribe</p>
-          <Button>
-            <FaRegUserCircle /> Login
-          </Button>
+          <Link to="/signin" style={{ textDecoration: "none", color: "none" }}>
+            <Button>
+              <FaRegUserCircle /> Login
+            </Button>
+          </Link>
         </LoginSec>
         <HR />
         <Title>Best of Devido</Title>

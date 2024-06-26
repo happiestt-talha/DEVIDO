@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FaRegUserCircle } from "react-icons/fa";
@@ -17,6 +17,7 @@ const NavContainer = styled.div`
   top: 0;
   overflow-y: scroll;
 
+  display: ${({ open }) => (open ? "block" : "none")};
   &::-webkit-scrollbar{
     display: none;
   }
@@ -31,7 +32,6 @@ const NavWrapper = styled.div`
   padding: 20px 10px;
 
 `
-
 const Logo = styled.div`
   padding: 0 0 0 5px;
   display: flex;
@@ -40,11 +40,9 @@ const Logo = styled.div`
   cursor: pointer;
   color: ${({ theme }) => theme.text};
 `
-
 const Img = styled.img`
   height: 25px;
 `
-
 const Item = styled.div`
   display: flex;
   align-items: center;
@@ -58,7 +56,6 @@ const Item = styled.div`
     /* background-color: hsla(0, 0%, 00%, 0.3); */
   }
 `
-
 const HR = styled.hr`
   height: 1px;
   /* border: 0.5px solid rgba(255, 255, 255, 0.5); */
@@ -108,6 +105,7 @@ const Title = styled.h2`
 
 const Menu = ({ darkMode, setDarkMode }) => {
 
+  const [open, setOpen] = useState(true)
   const navMainItems = [
     {
       title: "Home",
@@ -188,7 +186,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
   }
 
   return (
-    <NavContainer>
+    <NavContainer open={open}>
       <NavWrapper>
         <Link to="/" style={{ textDecoration: "none", color: "none" }}>
           <Logo>

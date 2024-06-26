@@ -14,7 +14,7 @@ const Container = styled.div`
   gap: 0.4rem;
   color: ${({ theme }) => theme.text};
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     flex-direction: column;
   }
 `

@@ -105,6 +105,7 @@ const Title = styled.h2`
 
 const Menu = ({ darkMode, setDarkMode }) => {
 
+  //eslint-disable-next-line
   const [open, setOpen] = useState(true)
   const navMainItems = [
     {

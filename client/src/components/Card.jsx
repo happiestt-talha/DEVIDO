@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Dummy from '../images/Dummy.jpg'
 import Dummy2 from '../images/Dummy2.jpg'
 import axios from "axios";
+import { format } from 'timeago.js'
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
@@ -64,11 +65,11 @@ const Card = ({ type, video }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(`/user/find/${video.userId}`)
-      console.log('Res from channel: ', res.data)
+      // console.log('Res from channel: ', res.data)
       setUser(res.data)
     }
 
-    fetchUser()
+   type !== "sm" && fetchUser()
 
     //eslint-disable-next-line
   }, [])
@@ -85,9 +86,15 @@ const Card = ({ type, video }) => {
             src={Dummy2}
           />
           <Texts>
-            <Title>{video.title.length > 30 ? video.title.slice(0, 30) + "..." : video.title}</Title>
-            <ChannelName>{user.name}</ChannelName>
-            <Info type={type}>{video.views} views • 1 day ago</Info>
+            {
+              type === "sm" ? <Title>Card Title</Title> : <Title>{video.title.length > 30 ? video.title.slice(0, 30) + "..." : video.title}</Title>
+            }
+            {
+              type === "sm" ? <ChannelName type={type}>Channel Name</ChannelName> : <ChannelName>{user.name}</ChannelName>
+            }
+            {
+              type === "sm" ? <Info type={type}>8,000,000 views • 18 days ago</Info> : <Info type={type}>{video.views} views • {format(video.createdAt)}</Info>
+            }
           </Texts>
         </Details>
       </Container>

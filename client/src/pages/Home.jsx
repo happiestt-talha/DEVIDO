@@ -16,7 +16,6 @@ const [videos,setVideos]=useState([])
 useEffect(() => {
   const fetchVideos = async () => {
     const res = await axios.get(`/video/${type}`)
-    console.log("Res data",res.data)
     setVideos(res.data)
   }
   fetchVideos()
@@ -26,7 +25,7 @@ useEffect(() => {
       <Container>
         {
           videos.map(video => (
-            <Card  />
+            <Card key={video._id} video={video}  />
           ))
         }
       </Container>

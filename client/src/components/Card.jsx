@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Dummy from '../images/Dummy.jpg'
 import Dummy2 from '../images/Dummy2.jpg'
+import axios from "axios";
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
@@ -56,7 +57,21 @@ const Info = styled.div`
   };
 `
 
-const Card = ({ type }) => {
+const Card = ({ type, video }) => {
+
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`/user/find/${video.userId}`)
+      console.log('Res from channel: ', res.data)
+      setUser(res.data)
+    }
+
+    fetchUser()
+
+    //eslint-disable-next-line
+  }, [])
   return (
     <Link to="/video/test" style={{ textDecoration: "none" }}>
       <Container type={type}>
@@ -70,9 +85,9 @@ const Card = ({ type }) => {
             src={Dummy2}
           />
           <Texts>
-            <Title>{"Test Video just to be used in public other wise will be deleted later soon".length > 30 ? "Test Video just to be used in public other wise will be deleted later soon".slice(0, 30) + "..." : "Test Video just to be used in public other wise will be deleted later soon"}</Title>
-            <ChannelName>Lama Dev</ChannelName>
-            <Info type={type}>660,908 views • 1 day ago</Info>
+            <Title>{video.title.length > 30 ? video.title.slice(0, 30) + "..." : video.title}</Title>
+            <ChannelName>{user.name}</ChannelName>
+            <Info type={type}>{video.views} views • 1 day ago</Info>
           </Texts>
         </Details>
       </Container>

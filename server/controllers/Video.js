@@ -72,7 +72,7 @@ export const addView = async (req, res, next) => {
 
 export const getTrend = async (req, res, next) => {
     try {
-        const videos = Video.find().sort({ views: -1 })
+        const videos =await Video.find().sort({ views: -1 })
         res.status(200).json(videos)
     } catch (error) {
         next(createError(403, error.message))

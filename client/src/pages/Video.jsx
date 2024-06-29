@@ -145,7 +145,7 @@ const Video = (props) => {
           <VideoWrapper>
             <Iframe
               src="https://www.youtube.com/embed/id7qgnqIZtg?si=_bgPx6_13Uo7XUG3"
-              title="YouTube video player"
+              // title="YouTube video player"
               allowFullScreen
               frameBorder={0}
             ></Iframe>

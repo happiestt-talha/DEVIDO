@@ -11,7 +11,7 @@ const authKey='qwedcsdbcidisjkcnb'
 export const authTest = (req, res) => {
     res.send("Auth test")
     console.log('Auth test')
-    // console.log('Req body: ', req.body)
+    console.log('Req body: ', req.body)
 }
 
 export const signup = async (req, res, next) => {

@@ -22,12 +22,10 @@ const Image = styled.img`
 `;
 const Details = styled.div`
   display: flex;
-  margin-top: ${(props) => props.type !== "sm" && "16px"};
+  background-color: ${({ theme }) => theme.bgLighter};
   gap: 12px;
   flex: 19;
-  padding:  ${(props) => (props.type === "sm" && "0px 8px")};
-
-  /* background-color: ${(props) => props.type === "sm" && "red"}; ; */
+  padding:  ${(props) => (props.type === "sm" ? "0px 8px" : "8px .5rem")};
 `;
 const ChannelImage = styled.img`
   width: 36px;
@@ -69,7 +67,7 @@ const Card = ({ type, video }) => {
       setUser(res.data)
     }
 
-   type !== "sm" && fetchUser()
+    type !== "sm" && fetchUser()
 
     //eslint-disable-next-line
   }, [])

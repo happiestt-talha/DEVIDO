@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaFileUpload, FaRegUserCircle } from "react-icons/fa";
 import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp } from "react-icons/io5";
 import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag, MdVideoCall } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
@@ -209,6 +209,14 @@ const Menu = ({ darkMode, setDarkMode }) => {
         <Item>
           <CgDarkMode />
           <span onClick={handleOnlick}> {darkMode ? "Light" : "Dark"} Mode</span>
+        </Item>
+        <HR />
+        <Item>
+          <label htmlFor="file">
+            <FaFileUpload />
+            Upload
+          </label>
+          <input type='file' onChange={(e) => console.log(e.target.files)}  alt="upload" style={{ display: "none" }} id="file"  />
         </Item>
         <HR />
         <LoginSec>

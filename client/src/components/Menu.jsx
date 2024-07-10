@@ -181,9 +181,9 @@ const Menu = ({ darkMode, setDarkMode }) => {
   ]
 
   const handleOnlick = () => {
-    console.log('Mode changed')
+    /* console.log('Mode changed') */
     setDarkMode(!darkMode)
-    console.log('Mode: ', darkMode)
+    /* console.log('Mode: ', darkMode) */
   }
 
   return (
@@ -216,7 +216,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
             <FaFileUpload />
             Upload
           </label>
-          <input type='file' onChange={(e) => console.log(e.target.files)}  alt="upload" style={{ display: "none" }} id="file"  />
+          <input type='file' onChange={(e) => console.log(e.target.files)} alt="upload" style={{ display: "none" }} id="file"  />
         </Item>
         <HR />
         <LoginSec>

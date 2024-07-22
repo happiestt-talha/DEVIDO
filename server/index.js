@@ -11,8 +11,8 @@ import cors from 'cors'
 
 const port=process.env.PORT || 5000
 const host=process.env.HOST || "http://localhost"
-const feUrl= "https://devido.vercel.app"
-// const feUrl=process.env.FE_URL|| "https://devido.vercel.app"
+// const feUrl= "https://devido.vercel.app"
+const feUrl=process.env.FE_URL|| "http://localhost:3000"
 
 dotenv.config();
 const app = express();

@@ -27,7 +27,6 @@ const NavContainer = styled.div`
   }
 
 `
-
 const NavWrapper = styled.div`
   padding: 20px 10px;
 

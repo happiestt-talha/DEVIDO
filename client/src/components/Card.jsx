@@ -10,12 +10,12 @@ const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
   margin-bottom: ${(props) => (props.type === "sm" ? "10px" : ".8rem")};
   cursor: pointer;
-  display: ${(props) => props.type === "sm" && "flex"};
+  display: ${(props) => props.type ===  "sm" && "flex"};
   /* gap: 10px; */
 `;
 const Image = styled.img`
   /* width: 100%; */
-  width:  ${(props) => (props.type === "sm" ? "200px" : "100%")};
+  width:  ${(props) => (props.type  === "sm" ? "200px" : "100%")};
   height: ${(props) => (props.type === "sm" ? "120px" : "202px")};
   background-color: #999;
   flex: 6;

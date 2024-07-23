@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Dummy from '../images/Dummy.jpg'
 import Dummy2 from '../images/Dummy2.jpg'
 import axios from "axios";
+//eslint-disable-next-line import/no-unresolved
 import { format } from 'timeago.js'
 
 const Container = styled.div`
@@ -91,6 +92,7 @@ const Card = ({ type, video }) => {
               type === "sm" ? <ChannelName type={type}>Channel Name</ChannelName> : <ChannelName>{user.name}</ChannelName>
             }
             {
+              //eslint-disable-next-line
               type === "sm" ? <Info type={type}>8,000,000 views • 18 days ago</Info> : <Info type={type}>{video.views} views • {format(video.createdAt)}</Info>
             }
           </Texts>

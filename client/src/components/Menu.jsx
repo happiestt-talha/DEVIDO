@@ -115,7 +115,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
     {
       title: "Video",
       icon: <MdVideoCall />,
-      link: '/video/test'
+      link: '/'
     },
     {
       title: "Explore",

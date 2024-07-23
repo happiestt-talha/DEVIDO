@@ -249,7 +249,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
         <HR />
         <Item>
           <CgLogOff />
-          Log Out
+          Log Out.
         </Item>
       </NavWrapper>
     </NavContainer >

@@ -4,9 +4,7 @@ import styled from "styled-components";
 import Dummy from '../images/Dummy.jpg'
 import Dummy2 from '../images/Dummy2.jpg'
 import axios from "axios";
-//eslint-disable-next-line import/no-unresolved
-import { format } from 'timeago.js'
-
+import moment from 'moment'
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
   margin-bottom: ${(props) => (props.type === "sm" ? "10px" : ".8rem")};
@@ -92,8 +90,8 @@ const Card = ({ type, video }) => {
               type === "sm" ? <ChannelName type={type}>Channel Name</ChannelName> : <ChannelName>{user.name}</ChannelName>
             }
             {
-              //eslint-disable-next-line
-              type === "sm" ? <Info type={type}>8,000,000 views • 18 days ago</Info> : <Info type={type}>{video.views} views • {format(video.createdAt)}</Info>
+
+              type === "sm" ? <Info type={type}>8,000,000 views • 18 days ago</Info> : <Info type={type}>{video.views} views • {moment(video.createdAt).fromNow()}</Info>
             }
           </Texts>
         </Details>

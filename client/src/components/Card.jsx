@@ -9,23 +9,32 @@ import { formatDistanceToNow } from 'date-fns';
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
   margin-bottom: ${(props) => (props.type === "sm" ? "10px" : ".8rem")};
-  cursor: pointer;
   display: ${(props) => props.type === "sm" && "flex"};
+  
+  cursor: pointer;
+  border-radius:.5rem ;
+  padding: 0;
 `;
 
 const Image = styled.img`
   width:  ${(props) => (props.type === "sm" ? "200px" : "100%")};
   height: ${(props) => (props.type === "sm" ? "120px" : "202px")};
   background-color: #999;
-  flex: 6;
+  /* border-radius: .5rem .5rem 0 0; */
+  border-radius: .5rem;
+  object-fit: cover;
+  margin: 0;
+  /* flex: 6; */
 `;
 
 const Details = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.bgLighter};
-  gap: 12px;
-  flex: 19;
-  padding:  ${(props) => (props.type === "sm" ? "0px 8px" : "8px .5rem")};
+  gap: .5rem;
+  /* flex: 19; */
+  padding:  ${(props) => (props.type === "sm" ? "0px 8px" : ".4rem")};
+
+  margin: 0;
 `;
 
 const ChannelImage = styled.img`
@@ -39,15 +48,15 @@ const ChannelImage = styled.img`
 const Texts = styled.div``;
 
 const Title = styled.h1`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   color: ${({ theme }) => theme.text};
 `;
 
 const ChannelName = styled.h2`
-  font-size: 14px;
+  font-size: .8rem;
   color: ${({ theme }) => theme.textSoft};
-  margin: 9px 0px;
+  margin: .2rem 0;
 `;
 
 const Info = styled.div`
@@ -68,6 +77,7 @@ const Card = ({ type, video }) => {
       const fetchUser = async () => {
         try {
           const res = await axios.get(`/user/find/${video.userId}`);
+          console.log(res.data)
           setUser(res.data);
         } catch (error) {
           console.error('Failed to fetch user:', error);
@@ -85,7 +95,7 @@ const Card = ({ type, video }) => {
   }
 
   return (
-    <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
+    // <Link to={`/test/${video._id}`} style={{ textDecoration: "none" }}>
       <Container type={type}>
         <Image type={type} src={Dummy} />
         <Details type={type}>
@@ -104,7 +114,7 @@ const Card = ({ type, video }) => {
           </Texts>
         </Details>
       </Container>
-    </Link>
+    // </Link>
   );
 };
 

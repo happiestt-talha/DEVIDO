@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Dummy from '../images/Dummy.jpg';
 import Dummy2 from '../images/Dummy2.jpg';
 import axios from "axios";
-import moment from 'moment';
+import { formatDistanceToNow } from 'date-fns';
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
@@ -98,7 +98,8 @@ const Card = ({ type, video }) => {
               {type === "sm" ? "Channel Name" : user.name || "Unknown"}
             </ChannelName>
             <Info type={type}>
-              {type === "sm" ? "8,000,000 views • 18 days ago" : `${video.views} views • ${moment(video.createdAt).fromNow()}`}
+              {type === "sm" ? "8,000,000 views • 18 days ago" : `${video.views} views • ${formatDistanceToNow(new Date(video.createdAt), { addSuffix: true })}`}
+              {/* {type === "sm" ? "8,000,000 views • 18 days ago" : `${video.views} views • ${video.createdAt}`} */}
             </Info>
           </Texts>
         </Details>

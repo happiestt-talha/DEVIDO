@@ -26,7 +26,7 @@ const Avatar = styled.img`
   border-radius: 50%;
 `
 const Comments = () => {
-
+  //eslint-disable-next-line
   const [comments,setComments]=useState([])
   useEffect(() => {
     const fetchComments = async () => {

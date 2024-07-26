@@ -96,7 +96,7 @@ const Card = ({ type, video }) => {
   }
 
   return (
-    // <Link to={`/test/${video._id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/test/${video._id}`} style={{ textDecoration: "none" }}>
       <Container type={type}>
         <Image type={type} src={Dummy} />
         <Details type={type}>
@@ -115,7 +115,7 @@ const Card = ({ type, video }) => {
           </Texts>
         </Details>
       </Container>
-    // </Link>
+    </Link>
   );
 };
 

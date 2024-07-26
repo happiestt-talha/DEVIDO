@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+//eslint-disable-next-line
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Dummy from '../images/Dummy.jpg';
@@ -10,7 +11,7 @@ const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
   margin-bottom: ${(props) => (props.type === "sm" ? "10px" : ".8rem")};
   display: ${(props) => props.type === "sm" && "flex"};
-  
+  /* background-color: red; */
   cursor: pointer;
   border-radius:.5rem ;
   padding: 0;

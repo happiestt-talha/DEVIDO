@@ -1,5 +1,5 @@
 import express from 'express'
-import { authTest, login, signup } from '../controllers/Auth.js'
+import { authTest, googleAuth, login, signup } from '../controllers/Auth.js'
 const router = express.Router()
 
 //! TEST ROUTE
@@ -13,8 +13,6 @@ router.post('/signup',signup)
 router.post('/login',login)
 
 //TODO: Google
-router.get('/google',(req,res)=>{
-    res.send("Google")
-})
+router.post('/google',googleAuth)
 
 export default router

@@ -7,7 +7,8 @@ import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, 
 import { BiSolidMovie } from "react-icons/bi";
 import { CgDarkMode, CgLogOff } from "react-icons/cg";
 import logo from '../images/logo.png'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/userSlice';
 
 const NavContainer = styled.div`
   flex: 1.3;
@@ -105,6 +106,7 @@ const Title = styled.h2`
 
 const Menu = ({ darkMode, setDarkMode }) => {
 
+  const dispatch = useDispatch()
   //eslint-disable-next-line
   const [open, setOpen] = useState(true)
   const navMainItems = [
@@ -190,6 +192,12 @@ const Menu = ({ darkMode, setDarkMode }) => {
     setDarkMode(!darkMode)
     /* console.log('Mode: ', darkMode) */
   }
+
+  const handleLogout = () => {
+    const answer = window.confirm('Are you sure you want to log out?')
+
+    answer && dispatch(logout())
+  }
   const { currentUser } = useSelector((state) => state.user)
   return (
     <NavContainer open={open}>
@@ -210,13 +218,12 @@ const Menu = ({ darkMode, setDarkMode }) => {
             </Link>
           ))
         }
-        
+
         <HR />
         <Item>
           <CgDarkMode />
           <span onClick={handleOnlick}> {darkMode ? "Light" : "Dark"} Mode</span>
         </Item>
-        <HR />
         {!currentUser && <>
           <HR />
           <LoginSec>
@@ -249,11 +256,16 @@ const Menu = ({ darkMode, setDarkMode }) => {
           ))
         }
 
-        <HR />
-        <Item>
-          <CgLogOff />
-          Log Out
-        </Item>
+
+        {
+          currentUser && <>
+            <HR />
+            <Item style={{ color: "red" }} onClick={handleLogout}>
+              <CgLogOff />
+              Log Out
+            </Item>
+          </>
+        }
       </NavWrapper>
     </NavContainer >
   )

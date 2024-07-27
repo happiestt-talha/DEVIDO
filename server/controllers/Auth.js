@@ -5,8 +5,8 @@ import bcrypt from 'bcrypt'
 import { createError } from '../error/error.js'
 let success = false
 
-const JWT_ACCESS_KEY='1ffb1d01c12d993ad7afa2144d6af34ae2d6eeaa6f'
-const authKey='qwedcsdbcidisjkcnb'
+const JWT_ACCESS_KEY = '1ffb1d01c12d993ad7afa2144d6af34ae2d6eeaa6f'
+const authKey = 'qwedcsdbcidisjkcnb'
 
 export const authTest = (req, res) => {
     res.send("Auth test")
@@ -42,7 +42,7 @@ export const login = async (req, res, next) => {
         // const token = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_KEY)
         // const token = jwt.sign({ id: user._id }, JWT_ACCESS_KEY)
         const token = jwt.sign({ id: user._id }, authKey)
-        const {password,...others}=user._doc
+        const { password, ...others } = user._doc
         success = true
 
         res
@@ -52,6 +52,40 @@ export const login = async (req, res, next) => {
             .status(200)
             .json({ success, ...others })
     } catch (err) {
-        next(createError(401,err.message))
+        next(createError(401, err.message))
     }
 }
+
+export const googleAuth = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        console.log("user: ", user)
+        if (user) {
+            const token = jwt.sign({ id: user._id }, authKey);
+            
+            res
+                .cookie("access_token", token, {
+                    httpOnly: true,
+                })
+                .status(200)
+                .json(user._doc);
+        } else {
+            const newUser = new User({
+                ...req.body,
+                fromGoogle: true,
+            });
+            console.log("newUser: ", newUser)
+            const savedUser = await newUser.save();
+            console.log("savedUser: ", savedUser)
+            const token = jwt.sign({ id: savedUser._id }, authKey);
+            res
+                .cookie("access_token", token, {
+                    httpOnly: true,
+                })
+                .status(200)
+                .json(savedUser._doc);
+        }
+    } catch (err) {
+        next(err);
+    }
+};

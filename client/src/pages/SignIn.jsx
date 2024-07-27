@@ -4,6 +4,9 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice'
 import { useNavigate } from 'react-router-dom'
+import { auth, provider } from '../firebase/firebase'
+import { signInWithPopup } from 'firebase/auth'
+
 
 const Container = styled.div`
   display: flex;
@@ -109,6 +112,29 @@ const SignIn = () => {
     }
   }
 
+  const handleGoogleSignin = async () => {
+    try {
+      dispatch(loginStart());
+
+      const res = await signInWithPopup(auth, provider);
+      console.log('Google Response: ', res);
+
+      const response = await axios.post('/auth/google', {
+        name: res.user.displayName,
+        email: res.user.email,
+        img: res.user.photoURL
+      });
+
+      console.log('Axios Response: ', response);
+      dispatch(loginSuccess(response.data));
+      // navigate('/');
+
+    } catch (error) {
+      console.log(error);
+      dispatch(loginFailure());
+    }
+  };
+
   return (
     <>
       <Container>
@@ -121,7 +147,7 @@ const SignIn = () => {
           </InputBox>
           <Button onClick={handleLogin}>Sign in</Button>
           <Title>OR</Title>
-          <Button>Sign in with Google</Button>
+          <Button onClick={handleGoogleSignin}>Sign in with Google</Button>
           <Title>OR</Title>
           <Input type='text' placeholder='Enter your username' />
           <Input type='email' placeholder='Enter your email' />

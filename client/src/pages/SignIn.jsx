@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   display: flex;
@@ -76,6 +80,35 @@ const Flex = styled.div`
   gap: 0.5rem;
 `
 const SignIn = () => {
+  const [details, setDetails] = useState({
+    name: '',
+    email: '',
+    password: '',
+  })
+  const dispatch = useDispatch()
+  const navigate=useNavigate()
+
+  const handleOnChange = (e) => {
+    console.log('OnChange: ', e.target.value)
+    setDetails({ ...details, [e.target.name]: e.target.value })
+  }
+  const handleLogin = async (e) => {
+    dispatch(loginStart())
+    e.preventDefault()
+    try {
+      const res = await axios.post('/auth/login', { name:details.name, password:details.password })
+      dispatch(loginSuccess(res.data))
+      console.log('res: ', res)
+
+      navigate('/')
+    } catch (error) {
+      console.log('Error: ', error)
+      dispatch(loginFailure())
+
+      alert(error.response.data.message)
+    }
+  }
+
   return (
     <>
       <Container>
@@ -83,10 +116,10 @@ const SignIn = () => {
           <Title>Sign in</Title>
           <SubTitle>to continue to YouTube</SubTitle>
           <InputBox>
-            <Input type='text' placeholder='Enter your username' />
-            <Input type='password' placeholder='password' />
+            <Input type='text' placeholder='Enter your username' name='name' value={details.name} onChange={handleOnChange} />
+            <Input type='password' placeholder='password' name='password' value={details.password} onChange={handleOnChange} />
           </InputBox>
-          <Button>Sign in</Button>
+          <Button onClick={handleLogin}>Sign in</Button>
           <Title>OR</Title>
           <Input type='text' placeholder='Enter your username' />
           <Input type='email' placeholder='Enter your email' />

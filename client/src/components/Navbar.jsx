@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { RiAccountPinCircleFill } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   position: sticky;
@@ -62,8 +63,14 @@ const Button = styled.button`
   align-items: center;
   gap: 5px;
 `;
+const Text = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text};
+`
 const Navbar = () => {
   const [text, setText] = useState('')
+  const { currentUser } = useSelector((state) => state.user);
   const handleOnchange = (e) => {
     setText(" ")
     console.log('Text: ', text)
@@ -74,14 +81,21 @@ const Navbar = () => {
       <Wrapper>
         <Search>
           <Input placeholder="Search" onChange={handleOnchange} value={text} />
-          <IoSearchSharp/>
+          <IoSearchSharp />
         </Search>
-        <Link to="signin" style={{ textDecoration: "none" }}>
-          <Button>
-            <RiAccountPinCircleFill/>
-            SIGN IN
-          </Button>
-        </Link>
+        {
+          currentUser ? (
+            <Link to="profile" style={{ textDecoration: "none" }}>
+              <Text>Hello {currentUser.name}</Text>
+            </Link>
+          )
+            : <Link to="signin" style={{ textDecoration: "none" }}>
+              <Button>
+                <RiAccountPinCircleFill />
+                SIGN IN
+              </Button>
+            </Link>
+        }
       </Wrapper>
     </Container>
   );

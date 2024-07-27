@@ -7,6 +7,7 @@ import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, 
 import { BiSolidMovie } from "react-icons/bi";
 import { CgDarkMode, CgLogOff } from "react-icons/cg";
 import logo from '../images/logo.png'
+import { useSelector } from 'react-redux';
 
 const NavContainer = styled.div`
   flex: 1.3;
@@ -137,6 +138,11 @@ const Menu = ({ darkMode, setDarkMode }) => {
       icon: <MdHistory />,
       link: '/history'
     },
+    {
+      title: "Upload",
+      icon: <FaFileUpload />,
+      link: '/upload'
+    }
   ]
   const navCatItems = [
     {
@@ -184,7 +190,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
     setDarkMode(!darkMode)
     /* console.log('Mode: ', darkMode) */
   }
-
+  const { currentUser } = useSelector((state) => state.user)
   return (
     <NavContainer open={open}>
       <NavWrapper>
@@ -204,29 +210,26 @@ const Menu = ({ darkMode, setDarkMode }) => {
             </Link>
           ))
         }
+        
         <HR />
         <Item>
           <CgDarkMode />
           <span onClick={handleOnlick}> {darkMode ? "Light" : "Dark"} Mode</span>
         </Item>
         <HR />
-        <Item>
-          <label htmlFor="file">
-            <FaFileUpload />
-            Upload
-          </label>
-          <input type='file' onChange={(e) => console.log(e.target.files)} alt="upload" style={{ display: "none" }} id="file"  />
-        </Item>
-        <HR />
-        <LoginSec>
-          <p>Log in to like, comment, and subscribe</p>
-          <Link to="/signin" style={{ textDecoration: "none", color: "none" }}>
-            <Button>
-              <FaRegUserCircle /> Login
-            </Button>
-          </Link>
-        </LoginSec>
-        <HR />
+        {!currentUser && <>
+          <HR />
+          <LoginSec>
+            <p>Log in to like, comment, and subscribe</p>
+            <Link to="/signin" style={{ textDecoration: "none", color: "none" }}>
+              <Button>
+                <FaRegUserCircle /> Login
+              </Button>
+            </Link>
+          </LoginSec>
+          <HR />
+        </>
+        }
         <Title>Best of Devido</Title>
         {
           navCatItems.map((item, index) => (

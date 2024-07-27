@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    currentUser: null,
+    video: null,
     loading: false,
     error: false
 }
@@ -9,24 +9,11 @@ const videoSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        loginStart: (state) => {
-            state.loading = true
-        },
-        loginSuccess: (state, action) => {
-            state.loading = false
-            state.currentUser = action.payload
-        },
-        loginFailure: (state) => {
-            state.loading = false
-            state.error = true
-        },
-        logout: (state) => {
-            state.currentUser = null
-        }
+
 
     }
 })
 
-export const { loginStart, loginSuccess, loginFailure, logout } = videoSlice.actions
+// export const { loginStart, loginSuccess, loginFailure, logout } = videoSlice.actions
 
 export default videoSlice.reducer

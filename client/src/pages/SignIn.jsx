@@ -86,7 +86,7 @@ const SignIn = () => {
     password: '',
   })
   const dispatch = useDispatch()
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   const handleOnChange = (e) => {
     console.log('OnChange: ', e.target.value)
@@ -96,7 +96,7 @@ const SignIn = () => {
     dispatch(loginStart())
     e.preventDefault()
     try {
-      const res = await axios.post('/auth/login', { name:details.name, password:details.password })
+      const res = await axios.post('/auth/login', { name: details.name, password: details.password })
       dispatch(loginSuccess(res.data))
       console.log('res: ', res)
 
@@ -120,6 +120,8 @@ const SignIn = () => {
             <Input type='password' placeholder='password' name='password' value={details.password} onChange={handleOnChange} />
           </InputBox>
           <Button onClick={handleLogin}>Sign in</Button>
+          <Title>OR</Title>
+          <Button>Sign in with Google</Button>
           <Title>OR</Title>
           <Input type='text' placeholder='Enter your username' />
           <Input type='email' placeholder='Enter your email' />

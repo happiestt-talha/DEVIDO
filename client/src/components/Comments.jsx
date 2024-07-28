@@ -30,8 +30,8 @@ const Comments = () => {
   const [comments,setComments]=useState([])
   useEffect(() => {
     const fetchComments = async () => {
-      const res = await axios.get("/comments")
-      setComments(res.data)
+      // const res = await axios.get("/comments")
+      // setComments(res.data)
     }
     fetchComments()
   }, [])

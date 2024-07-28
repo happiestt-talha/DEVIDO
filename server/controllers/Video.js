@@ -54,7 +54,7 @@ export const getVideo = async (req, res, next) => {
         success = true
         res.status(200).json({ success, ...video._doc })
     } catch (err) {
-        next(createError(404, err.message))
+        next(createError(403, err.message))
     }
 }
 

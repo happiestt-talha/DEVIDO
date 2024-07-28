@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 const Container = styled.div`
     width: 100%;
@@ -16,11 +16,15 @@ const Text = styled.h1`
 `
 
 const TestComp = () => {
+    const path=useLocation().pathname.split("/")[2]
+
     const { id } = useParams()
     return (
         <Container>
             <h1>Video Id:</h1>
             <Text>{id ? id : 'No ID Provided'}</Text>
+            <h1>Path:</h1>
+            <Text>{path}</Text>
         </Container>
     )
 }

@@ -42,10 +42,15 @@ function App() {
                   <Route path="explore" element={<Home type="trend" />} />
                   <Route path="sub" element={<Home type="sub" />} />
                   <Route path="signin" element={<SignIn />} />
-                  <Route path="video" element={<Video />} />
+                  
                   <Route path="test" element={<TestComp />}>
                     <Route path=":id" element={<TestComp />} />
                   </Route>
+
+                  <Route path="video" element={<Video />}>
+                    <Route path=":id" element={<Video />} />
+                  </Route>
+                  
                 </Route>
                 <Route path="/test" element={<Test />} />
               </Routes>

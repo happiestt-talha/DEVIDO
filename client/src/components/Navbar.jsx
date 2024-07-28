@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
-
+import { Flex } from "../pages/SignIn";
 const Container = styled.div`
   position: sticky;
   top: 0;
   background-color: ${({ theme }) => theme.soft};
-  height: 2.3rem;
+  /* height: 2.3rem; */
+  padding: 0.2rem 0;
 `;
-
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -24,7 +24,6 @@ const Wrapper = styled.div`
     justify-content: space-between;
   }
 `;
-
 const Search = styled.div`
   width: 40%;
   left: 0px;
@@ -42,7 +41,6 @@ const Search = styled.div`
 
 }
 `;
-
 const Input = styled.input`
   width: 60%;
   border: none;
@@ -50,7 +48,6 @@ const Input = styled.input`
   outline: none;
   color: ${({ theme }) => theme.text};
 `;
-
 const Button = styled.button`
   padding: 5px 15px;
   background-color: transparent;
@@ -64,9 +61,16 @@ const Button = styled.button`
   gap: 5px;
 `;
 const Text = styled.div`
-  font-size: 14px;
+  font-size: .8rem;
   font-weight: 500;
   color: ${({ theme }) => theme.text};
+`
+const Img = styled.img`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: burlywood;
 `
 const Navbar = () => {
   const [text, setText] = useState('')
@@ -84,11 +88,15 @@ const Navbar = () => {
           <IoSearchSharp />
         </Search>
         {
-          currentUser ? (
-            <Link to="profile" style={{ textDecoration: "none" }}>
-              <Text>Hello {currentUser.name}</Text>
-            </Link>
-          )
+          currentUser
+            ? <>
+              <Link to="profile" style={{ textDecoration: "none" }}>
+                <Flex>
+                  <Img src={currentUser.img} alt="" />
+                  <Text>Hello {currentUser.name}</Text>
+                </Flex>
+              </Link>
+            </>
             : <Link to="signin" style={{ textDecoration: "none" }}>
               <Button>
                 <RiAccountPinCircleFill />

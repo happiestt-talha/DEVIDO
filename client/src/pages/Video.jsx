@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Comments from '../components/Comments'
 import Card from '../components/Card'
@@ -7,6 +7,8 @@ import { BiBookmarkPlus } from "react-icons/bi";
 import { FaShareSquare } from "react-icons/fa";
 import { BiDislike } from "react-icons/bi";
 import { BiLike } from "react-icons/bi";
+import { useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 const Container = styled.div`
   width: 100%;
@@ -27,7 +29,6 @@ const Reccomendation = styled.div`
   flex-direction: column;
   gap: 0.6rem;
 `
-
 const VideoWrapper = styled.div`
 `
 const Details = styled.div`
@@ -71,14 +72,12 @@ const Button = styled.div`
     /* background-color: #485867; */
   }
 `
-
 const HR = styled.hr`
   height: 2px;
   background-color: ${({ theme }) => theme.soft};
   border: none;
   margin: 0.6rem 0;
 `
-
 const Channel = styled.div`
   display: flex;
   justify-content: space-between;
@@ -124,8 +123,7 @@ const Subscribe = styled.button`
   padding: 10px 20px;
   cursor: pointer;
 `
-
-const Iframe = styled.iframe`
+const VideoFrame = styled.iframe`
   width: 100%;
   height:28rem;
 
@@ -133,22 +131,26 @@ const Iframe = styled.iframe`
     height: 20rem;
   }
 `
-const Video = (props) => {
+const Video = () => {
+  const path = useLocation().pathname.split("/")[2]
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+    console.log('Path: ', path)
+    const fetchVideos = async () => {
+      const videoRes = await axios.get(`/video/find/${path}`);
+      const channelRes = await axios.get(`/user/find/${videoRes.data.userId}`);
+      console.log('Video: ', videoRes.data)
+      console.log('Channel: ', channelRes.data)
+    };
+    fetchVideos();
+  }, [path])
   return (
     <>
       <Container>
         <Content>
           <VideoWrapper>
-            <Iframe
-              src="https://www.youtube.com/embed/id7qgnqIZtg?si=_bgPx6_13Uo7XUG3"
-              // title="YouTube video player"
-              allowFullScreen
-              frameBorder={0}
-            ></Iframe>
+            <VideoFrame src={`https://www.youtube.com/embed/${path}`} />
           </VideoWrapper>
           <Title>Tom and Jerry</Title>
           <Details>

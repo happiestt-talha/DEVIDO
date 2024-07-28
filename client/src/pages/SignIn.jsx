@@ -13,29 +13,29 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 4.5rem);
+  /* height: calc(100vh - 4.5rem); */
   width: 100%;
   background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text};
 `
 const Wrapper = styled.div`
-  width: 18rem;
+  /* width: 18rem; */
   border: 2px solid ${({ theme }) => theme.soft};
   border-radius: 5px;
   box-shadow: 14px 19px 15px 9px ${({ theme }) => theme.bgLighter};
-  padding: 1rem;
+  padding: .5rem;
 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
 `
 const Title = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
 `
 const SubTitle = styled.h2`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
 `
 const Input = styled.input`
@@ -77,7 +77,7 @@ const InputBox = styled.div`
   gap: 0.4rem;
   /* background-color: red; */
 `
-const Flex = styled.div`
+export const Flex = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -127,7 +127,7 @@ const SignIn = () => {
 
       console.log('Axios Response: ', response);
       dispatch(loginSuccess(response.data));
-      // navigate('/');
+      navigate('/');
 
     } catch (error) {
       console.log(error);

@@ -64,7 +64,7 @@ export const googleAuth = async (req, res, next) => {
             const token = jwt.sign({ id: user._id }, authKey);
             
             res
-                .cookie("access_token", token, {
+                .cookie("accessToken", token, {
                     httpOnly: true,
                 })
                 .status(200)
@@ -79,7 +79,7 @@ export const googleAuth = async (req, res, next) => {
             console.log("savedUser: ", savedUser)
             const token = jwt.sign({ id: savedUser._id }, authKey);
             res
-                .cookie("access_token", token, {
+                .cookie("accessToken", token, {
                     httpOnly: true,
                 })
                 .status(200)

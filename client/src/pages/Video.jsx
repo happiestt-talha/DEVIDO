@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Comments from '../components/Comments'
 import Card from '../components/Card'
-import Dummy from '../images/Dummy.jpg'
-import { BiBookmarkPlus } from "react-icons/bi";
+import { BiBookmarkPlus, BiSolidDislike, BiSolidLike } from "react-icons/bi";
 import { FaShareSquare } from "react-icons/fa";
 import { BiDislike } from "react-icons/bi";
 import { BiLike } from "react-icons/bi";
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchStart, fetchSuccess } from '../redux/videoSlice'
+import { formatDistanceToNow } from 'date-fns'
 
 const Container = styled.div`
   width: 100%;
@@ -133,18 +135,37 @@ const VideoFrame = styled.iframe`
 `
 const Video = () => {
   const path = useLocation().pathname.split("/")[2]
+  const dispatch = useDispatch()
+  const [channel, setChannel] = useState({})
+  const { currentVideo } = useSelector((state) => state.video)
+  const { currentUser } = useSelector((state) => state.user)
 
   useEffect(() => {
     window.scrollTo(0, 0)
     console.log('Path: ', path)
     const fetchVideos = async () => {
+      dispatch(fetchStart())
       const videoRes = await axios.get(`/video/find/${path}`);
       const channelRes = await axios.get(`/user/find/${videoRes.data.userId}`);
-      console.log('Video: ', videoRes.data)
-      console.log('Channel: ', channelRes.data)
+      dispatch(fetchSuccess(videoRes.data))
+      setChannel(channelRes.data)
     };
     fetchVideos();
-  }, [path])
+  }, [path, dispatch]);
+
+  const handleLike = async () => {
+    try {
+
+
+      const res = await axios.put(`/user/like/${path}`)
+      console.log('Like res: ', res.data)
+    } catch (error) {
+      console.error('Failed to like video:', error);
+    }
+  }
+  const handleDislike = async () => {
+
+  }
   return (
     <>
       <Container>
@@ -152,15 +173,29 @@ const Video = () => {
           <VideoWrapper>
             <VideoFrame src={`https://www.youtube.com/embed/${path}`} />
           </VideoWrapper>
-          <Title>Tom and Jerry</Title>
+          <Title>{currentVideo?.title}</Title>
           <Details>
-            <Info>8,000,000 views • 1 day ago</Info>
+            <Info>{currentVideo?.views} views • {formatDistanceToNow(new Date(currentVideo?.createdAt), { addSuffix: true })}</Info>
             <Buttons>
-              <Button>
-                <BiLike /> Like
+              <Button onClick={handleLike}>
+                {
+                  <>
+                    {currentVideo.likes.includes(currentUser._id)
+                      ? <BiSolidLike />
+                      : <BiLike />}
+                    {currentVideo?.likes.length} Like
+                  </>
+                }
               </Button>
-              <Button>
-                <BiDislike /> Dislike
+              <Button onClick={handleDislike}>
+                {
+                  <>
+                    {currentVideo.dislikes.includes(currentUser._id)
+                      ? <BiSolidDislike />
+                      : <BiDislike />}
+                    {currentVideo?.dislikes.length} Dislike
+                  </>
+                }
               </Button>
               <Button>
                 <FaShareSquare /> Share
@@ -173,12 +208,12 @@ const Video = () => {
           <HR />
           <Channel>
             <ChannelInfo>
-              <ChannelImage src={Dummy} />
+              <ChannelImage src={channel?.img} />
               <ChannelDetails>
-                <ChannelName>Tom and Jerry</ChannelName>
-                <ChannelCounter>200k subscribers</ChannelCounter>
+                <ChannelName>{channel?.name}</ChannelName>
+                <ChannelCounter>{channel.subscribers} subscribers</ChannelCounter>
                 <Description>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui dicta voluptas quo quae quos sunt! Officiis placeat molestiae?
+                  {currentVideo?.desc}
                 </Description>
               </ChannelDetails>
             </ChannelInfo>

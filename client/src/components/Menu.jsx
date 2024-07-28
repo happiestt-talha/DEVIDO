@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaFileUpload, FaRegUserCircle } from "react-icons/fa";
 import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp } from "react-icons/io5";
 import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag, MdVideoCall } from "react-icons/md";
@@ -107,6 +107,7 @@ const Title = styled.h2`
 const Menu = ({ darkMode, setDarkMode }) => {
 
   const dispatch = useDispatch()
+  const navigate=useNavigate()
   //eslint-disable-next-line
   const [open, setOpen] = useState(true)
   const navMainItems = [
@@ -197,6 +198,8 @@ const Menu = ({ darkMode, setDarkMode }) => {
     const answer = window.confirm('Are you sure you want to log out?')
 
     answer && dispatch(logout())
+    navigate('/')
+    if (!answer) return
   }
   const { currentUser } = useSelector((state) => state.user)
   return (

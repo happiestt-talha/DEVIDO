@@ -5,6 +5,7 @@ import { createError } from '../error/error.js'
 dotenv.config()
 const authKey='qwedcsdbcidisjkcnb'
 export const verifyUser = (req, res, next) => {
+    // const token = req.cookies.access_token
     const token = req.cookies.accessToken
     // const token = req.header('authToken')
     

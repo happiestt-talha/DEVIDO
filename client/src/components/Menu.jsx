@@ -198,8 +198,8 @@ const Menu = ({ darkMode, setDarkMode }) => {
     const answer = window.confirm('Are you sure you want to log out?')
 
     answer && dispatch(logout())
-    navigate('/')
     if (!answer) return
+    navigate('/')
   }
   const { currentUser } = useSelector((state) => state.user)
   return (

@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Comments from '../components/Comments'
 import Card from '../components/Card'
-import { BiBookmarkPlus, BiSolidDislike, BiSolidLike } from "react-icons/bi";
+import { BiBookmarkPlus, BiSolidDislike, BiSolidLike, BiDislike, BiLike } from "react-icons/bi";
 import { FaShareSquare } from "react-icons/fa";
-import { BiDislike } from "react-icons/bi";
-import { BiLike } from "react-icons/bi";
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchStart, fetchSuccess } from '../redux/videoSlice'
+import { dislike, fetchStart, fetchSuccess, like } from '../redux/videoSlice'
 import { formatDistanceToNow } from 'date-fns'
+import { subscription } from '../redux/userSlice';
 
 const Container = styled.div`
   width: 100%;
@@ -67,11 +66,28 @@ const Button = styled.div`
   padding: 0.5rem 0.4rem;
   border-radius: 0.5rem;
 
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
+  transition: transform 2s cubic-bezier(0.43, 0.42, 0.45, 0.94);
 
   &:hover{
     background-color: ${({ theme }) => theme.bgLighter};
-    /* background-color: #485867; */
+  }
+`
+const LButton = styled(Button)`
+  &:active{
+    animation: popup 1s cubic-bezier(0.43, 0.42, 0.45, 0.94);
+  }
+  
+  @keyframes popup {
+    0% {
+      transform: scale(0.9);
+    }
+    50% {
+      transform: scale(1.6);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 `
 const HR = styled.hr`
@@ -88,7 +104,6 @@ const Channel = styled.div`
 const ChannelInfo = styled.div`
   display: flex;
   gap: 1rem;
-  /* align-items: center; */
 `
 const ChannelDetails = styled.div`
   display: flex;
@@ -124,6 +139,22 @@ const Subscribe = styled.button`
   height: max-content;
   padding: 10px 20px;
   cursor: pointer;
+
+  &:active{
+    animation: changeColor 2s;
+  }
+
+  @keyframes changeColor {
+    0% {
+      background-color: #cc1a00;
+    }
+    50% {
+      background: linear-gradient(45deg, #cc1a00, #ec7316);
+    }
+    100% {
+      background-color: #cc1a00;
+    }
+  }
 `
 const VideoFrame = styled.iframe`
   width: 100%;
@@ -142,30 +173,53 @@ const Video = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    console.log('Path: ', path)
     const fetchVideos = async () => {
       dispatch(fetchStart())
-      const videoRes = await axios.get(`/video/find/${path}`);
-      const channelRes = await axios.get(`/user/find/${videoRes.data.userId}`);
-      dispatch(fetchSuccess(videoRes.data))
-      setChannel(channelRes.data)
+      try {
+        const videoRes = await axios.get(`/video/find/${path}`);
+        const channelRes = await axios.get(`/user/find/${videoRes.data.userId}`);
+        console.log('videoRes: ', videoRes.data)
+        console.log('channelRes: ', channelRes.data)
+        dispatch(fetchSuccess(videoRes.data))
+        setChannel(channelRes.data)
+      } catch (error) {
+        console.error('Failed to fetch video or channel data:', error);
+      }
     };
     fetchVideos();
   }, [path, dispatch]);
 
   const handleLike = async () => {
     try {
-
-
-      const res = await axios.put(`/user/like/${path}`)
-      console.log('Like res: ', res.data)
+      dispatch(like(currentUser?._id))
+      await axios.put(`/user/like/${path}`)
     } catch (error) {
       console.error('Failed to like video:', error);
     }
   }
-  const handleDislike = async () => {
 
+  const handleDislike = async () => {
+    try {
+      dispatch(dislike(currentUser?._id))
+      await axios.put(`/user/dislike/${path}`)
+    } catch (error) {
+      console.error('Failed to dislike video:', error);
+    }
   }
+
+  const handleSub = async () => {
+    try {
+      dispatch(subscription(channel._id))
+      if (currentUser.subscribedUsers.includes(channel._id)) {
+        await axios.put(`/user/unsub/${channel._id}`)
+      } else {
+        await axios.put(`/user/sub/${channel._id}`)
+      }
+    } catch (error) {
+      console.error('Failed to subscribe/unsubscribe:', error);
+    }
+  }
+
   return (
     <>
       <Container>
@@ -177,26 +231,18 @@ const Video = () => {
           <Details>
             <Info>{currentVideo?.views} views • {formatDistanceToNow(new Date(currentVideo?.createdAt), { addSuffix: true })}</Info>
             <Buttons>
-              <Button onClick={handleLike}>
-                {
-                  <>
-                    {currentVideo.likes.includes(currentUser._id)
-                      ? <BiSolidLike />
-                      : <BiLike />}
-                    {currentVideo?.likes.length} Like
-                  </>
-                }
-              </Button>
-              <Button onClick={handleDislike}>
-                {
-                  <>
-                    {currentVideo.dislikes.includes(currentUser._id)
-                      ? <BiSolidDislike />
-                      : <BiDislike />}
-                    {currentVideo?.dislikes.length} Dislike
-                  </>
-                }
-              </Button>
+              <LButton onClick={handleLike}>
+                {currentVideo?.likes.includes(currentUser?._id)
+                  ? <BiSolidLike />
+                  : <BiLike />}
+                {currentVideo?.likes.length} Like
+              </LButton>
+              <LButton onClick={handleDislike}>
+                {currentVideo?.dislikes.includes(currentUser?._id)
+                  ? <BiSolidDislike />
+                  : <BiDislike />}
+                {currentVideo?.dislikes.length} Dislike
+              </LButton>
               <Button>
                 <FaShareSquare /> Share
               </Button>
@@ -211,35 +257,27 @@ const Video = () => {
               <ChannelImage src={channel?.img} />
               <ChannelDetails>
                 <ChannelName>{channel?.name}</ChannelName>
-                <ChannelCounter>{channel.subscribers} subscribers</ChannelCounter>
+                <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
                 <Description>
                   {currentVideo?.desc}
                 </Description>
               </ChannelDetails>
             </ChannelInfo>
-            <Subscribe>Subscribe</Subscribe>
+            <Subscribe onClick={handleSub}>
+              {currentUser?.subscribedUsers?.includes(channel?._id)
+                ? 'SUBSCRIBED'
+                : 'SUBSCRIBE'}
+            </Subscribe>
           </Channel>
           <HR />
-          <>
-            <Comments />
-          </>
+          <Comments />
         </Content>
         <Reccomendation>
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
-          <Card type="sm" />
+          {Array.from({ length: 14 }).map((_, index) => (
+            <Card key={index} type="sm" />
+          ))}
         </Reccomendation>
-      </Container >
+      </Container>
     </>
   )
 }

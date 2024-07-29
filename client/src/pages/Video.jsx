@@ -270,7 +270,7 @@ const Video = () => {
             </Subscribe>
           </Channel>
           <HR />
-          <Comments />
+          <Comments videoId={currentVideo?._id} />
         </Content>
         <Reccomendation>
           {Array.from({ length: 14 }).map((_, index) => (

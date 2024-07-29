@@ -32,14 +32,14 @@ const Text = styled.p`
 `
 
 
-const Comment = () => {
+const Comment = ({comment}) => {
   return (
     <>
       <Container>
-        <Avatar src={Dummy} />
+        <Avatar src={comment.img || Dummy} />
         <Details>
-          <Name>Bhila Bhai</Name>
-          <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. At exercitationem consequuntur beatae earum cumque doloremque!</Text>
+          <Name>{comment.name}</Name>
+          <Text>{comment.desc}</Text>
         </Details>
       </Container>
     </>

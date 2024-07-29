@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   padding: 0.6rem 0.6rem;
   display: flex;
   gap:1rem ;
+  
 `
 const Input = styled.input`
   background-color: transparent;

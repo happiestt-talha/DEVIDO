@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 `
 const Input = styled.input`
   background-color: transparent;
-  border: none;
+  border: 1px solid;
   color: ${({ theme }) => theme.text};
   font-size: 1rem;
   padding: 0.5rem 0.5rem;
@@ -48,14 +48,19 @@ const Comments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`/comments/${videoId}`)
-        setComments(res.data)
+        console.log('Fetching comments...')
+        console.log('Video ID: ', videoId)
+        const res = await axios.get(`/comment/${videoId}`)
+        console.log('Comments: ', res.data)
+        setComments( res.data)
       } catch (err) {
-        console.log(err)
+        console.log('err: ', err)
       }
     }
-    fetchComments()
-  }, [videoId])
+    // fetchComments()
+  }, [videoId, comments])
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -64,7 +69,7 @@ const Comments = ({ videoId }) => {
       console.log('Comment: ', comment)
       const res = await axios.post(`/comment`, { desc: comment, videoId: videoId })
       console.log('Comment res: ', res.data)
-      setComments(...comments, res.data)
+      setComments((prev)=> [...prev, res.data])
       setComment('')
     } catch (err) {
       console.log(err)
@@ -82,8 +87,8 @@ const Comments = ({ videoId }) => {
         <Wrapper>
           <Avatar src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
           <Input placeholder="Add a comment..." onChange={handleChange} value={comment} />
-        </Wrapper>
         <Button onClick={handleSubmit}>Post</Button>
+        </Wrapper>
         {
         comments.length > 0 &&  comments.map((comment) => (
             <Comment key={comment._id} comment={comment} />

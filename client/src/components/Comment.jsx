@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Dummy from '../images/Dummy.jpg'
+import axios from 'axios'
 
 const Container = styled.div`
   display: flex;
@@ -33,12 +34,21 @@ const Text = styled.p`
 
 
 const Comment = ({comment}) => {
+  const [channel, setChannel] = useState({});
+
+  useEffect(() => {
+    const fetchComment = async () => {
+      const res = await axios.get(`/user/find/${comment.userId}`);
+      setChannel(res.data)
+    };
+    fetchComment();
+  }, [comment.userId]);
   return (
     <>
       <Container>
-        <Avatar src={comment.img || Dummy} />
+        <Avatar src={channel.img || Dummy} />
         <Details>
-          <Name>{comment.name}</Name>
+          <Name>{channel.name}</Name>
           <Text>{comment.desc}</Text>
         </Details>
       </Container>

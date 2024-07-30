@@ -15,7 +15,9 @@ const [videos,setVideos]=useState([])
 
 useEffect(() => {
   const fetchVideos = async () => {
+    console.log('Fetching videos...')
     const res = await axios.get(`/video/${type}`)
+    console.log('Videos: ', res.data)
     setVideos(res.data)
   }
   fetchVideos()

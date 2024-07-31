@@ -1,13 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth"
 const firebaseConfig = {
-    apiKey: "AIzaSyCe54C4sObu4GIeGSC4JbRniAw5gwgZwk8",
-    authDomain: "devido-60703.firebaseapp.com",
-    projectId: "devido-60703",
-    storageBucket: "devido-60703.appspot.com",
-    messagingSenderId: "314013878008",
-    appId: "1:314013878008:web:187881804749cfded25d0d",
-    measurementId: "G-K4C1YW3JNV"
+    apiKey: "AIzaSyBmItkZ6Tt7qAu8J26rBOoNdUHxjeeECJM",
+    authDomain: "deved-ea838.firebaseapp.com",
+    projectId: "deved-ea838",
+    storageBucket: "deved-ea838.appspot.com",
+    messagingSenderId: "597499536630",
+    appId: "1:597499536630:web:ca5cc6575ce624079778d7"
 };
 
 // Initialize Firebase

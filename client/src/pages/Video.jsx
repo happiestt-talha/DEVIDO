@@ -231,7 +231,7 @@ const Video = () => {
       <Container>
         <Content>
           <VideoWrapper>
-            <VideoFrame src={`https://www.youtube.com/embed/${path}`} />
+            <VideoFrame src={currentVideo?.videoUrl} title={currentVideo?.title} controls autoPlay loop muted playsInline allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen" />
           </VideoWrapper>
           <Title>{currentVideo?.title}</Title>
           <Details>

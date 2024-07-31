@@ -6,6 +6,7 @@ import Dummy from '../images/Dummy.jpg';
 import Dummy2 from '../images/Dummy2.jpg';
 import axios from "axios";
 import { formatDistanceToNow } from 'date-fns';
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
@@ -71,6 +72,7 @@ const Info = styled.div`
 `;
 
 const Card = ({ type, video }) => {
+  const { currentVideo } = useSelector((state) => state.video)
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -98,7 +100,7 @@ const Card = ({ type, video }) => {
   return (
     <Link to={`/video/${video._id}`} style={{ textDecoration: "none" }}>
       <Container type={type}>
-        <Image type={type} src={Dummy} />
+        <Image type={type} src={currentVideo.imgUrl ? currentVideo.imgUrl : Dummy} />
         <Details type={type}>
           <ChannelImage type={type} src={Dummy2} />
           <Texts>

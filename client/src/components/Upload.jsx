@@ -24,6 +24,7 @@ const Wrapper = styled.div`
     align-items: center;
     background-color: ${({ theme }) => theme.bg};
     border: 1px solid ${({ theme }) => theme.soft};
+    color: ${({ theme }) => theme.text};
     border-radius: 3px;
 `;
 const Input = styled.input`
@@ -32,6 +33,7 @@ const Input = styled.input`
     border-radius: 3px;
     width: 80%;
     background-color: transparent;
+    color: ${({ theme }) => theme.text};
 `;
 const Button = styled.button`
     padding: 0.9rem;
@@ -121,8 +123,9 @@ const Upload = ({ setOpen }) => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const res = await axios.post("/videos", { ...inputs, tags })
-        setOpen(false)
+        console.log('Handle upload...')
+        const res = await axios.post("/video", { ...inputs, tags })
+        console.log('Upload res: ', res.data)
         res.status === 200 && navigate(`/video/${res.data._id}`)
     }
 
@@ -132,7 +135,7 @@ const Upload = ({ setOpen }) => {
                 <h1>Upload a New Video</h1>
                 <Label>Video:</Label>
                 {videoPerc > 0 ? (
-                    "Uploading:" + videoPerc
+                    "Uploading:" + videoPerc + "%"
                 ) : (
                     <Input
                         type="file"

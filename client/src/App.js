@@ -9,6 +9,7 @@ import Video from "./pages/Video";
 import SignIn from "./pages/SignIn";
 import Test from "./pages/Test";
 import TestComp from "./components/TestComp";
+import Upload from "./components/Upload";
 
 const Container = styled.div`
   display: flex;
@@ -42,7 +43,8 @@ function App() {
                   <Route path="explore" element={<Home type="trend" />} />
                   <Route path="sub" element={<Home type="sub" />} />
                   <Route path="signin" element={<SignIn />} />
-                  
+                  <Route path="upload" element={<Upload />} />
+
                   <Route path="test" element={<TestComp />}>
                     <Route path=":id" element={<TestComp />} />
                   </Route>
@@ -50,7 +52,7 @@ function App() {
                   <Route path="video" element={<Video />}>
                     <Route path=":id" element={<Video />} />
                   </Route>
-                  
+
                 </Route>
                 <Route path="/test" element={<Test />} />
               </Routes>

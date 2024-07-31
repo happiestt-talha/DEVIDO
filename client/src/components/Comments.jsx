@@ -57,18 +57,19 @@ const Comments = ({ videoId }) => {
         console.log('err: ', err)
       }
     }
-    // fetchComments()
-  }, [videoId, comments])
+    fetchComments()
+  }, [videoId])
 
   
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      console.log('Submitting comment...')
-      console.log('Comment: ', comment)
+      // console.log('Submitting comment...')
+      // console.log('Comment: ', comment)
+      // console.log('Video ID: ', videoId)
       const res = await axios.post(`/comment`, { desc: comment, videoId: videoId })
-      console.log('Comment res: ', res.data)
+      // console.log('Comment res: ', res.data)
       setComments((prev)=> [...prev, res.data])
       setComment('')
     } catch (err) {

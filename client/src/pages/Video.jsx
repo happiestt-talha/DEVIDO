@@ -139,23 +139,27 @@ const Subscribe = styled.button`
   height: max-content;
   padding: 10px 20px;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 
-  &:active{
-    animation: changeColor 2s;
+  &:active {
+    text-shadow: 6px 0 5px rgba(250, 198, 8, 0.881);
   }
 
-  @keyframes changeColor {
+  @keyframes changeTextShadow {
     0% {
-      background-color: #cc1a00;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
     50% {
-      background: linear-gradient(45deg, #cc1a00, #ec7316);
+      text-shadow: 6px 0 5px rgba(27, 227, 30, 0.7);
     }
     100% {
-      background-color: #cc1a00;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
   }
-`
+`;
+
+
 const VideoFrame = styled.iframe`
   width: 100%;
   height:28rem;
@@ -167,6 +171,7 @@ const VideoFrame = styled.iframe`
 const Video = () => {
   const path = useLocation().pathname.split("/")[2]
   const dispatch = useDispatch()
+
   const [channel, setChannel] = useState({})
   const { currentVideo } = useSelector((state) => state.video)
   const { currentUser } = useSelector((state) => state.user)
@@ -178,9 +183,10 @@ const Video = () => {
       try {
         const videoRes = await axios.get(`/video/find/${path}`);
         const channelRes = await axios.get(`/user/find/${videoRes.data.userId}`);
-        console.log('videoRes: ', videoRes.data)
-        console.log('channelRes: ', channelRes.data)
+        // console.log('videoRes: ', videoRes.data)
+        // console.log('channelRes: ', channelRes.data)
         dispatch(fetchSuccess(videoRes.data))
+        // console.log('currentVideo: ', currentVideo)
         setChannel(channelRes.data)
       } catch (error) {
         console.error('Failed to fetch video or channel data:', error);
@@ -270,7 +276,7 @@ const Video = () => {
             </Subscribe>
           </Channel>
           <HR />
-          <Comments videoId={currentVideo?._id} />
+          <Comments videoId={currentVideo._id} />
         </Content>
         <Reccomendation>
           {Array.from({ length: 14 }).map((_, index) => (

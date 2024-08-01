@@ -98,7 +98,7 @@ const HR = styled.hr`
 `
 const Channel = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 `
 const ChannelInfo = styled.div`
@@ -109,6 +109,7 @@ const ChannelDetails = styled.div`
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.text};
+
 `
 const ChannelName = styled.h3`
   font-size: 1rem;
@@ -125,7 +126,8 @@ const ChannelImage = styled.img`
   border-radius: 50%;
 `
 const Description = styled.p`
-  width: 70%;
+  width: 90%;
+  /* flex: 3; */
   margin-top: 0.4rem;
   font-size: 0.8rem;
   color: ${({ theme }) => theme.textSoft};
@@ -139,8 +141,8 @@ const Subscribe = styled.button`
   height: max-content;
   padding: 10px 20px;
   cursor: pointer;
-  position: relative;
   overflow: hidden;
+
 
   &:active {
     text-shadow: 6px 0 5px rgba(250, 198, 8, 0.881);
@@ -158,7 +160,11 @@ const Subscribe = styled.button`
     }
   }
 `;
-
+const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  /* gap: 0.5rem; */
+`
 
 const VideoFrame = styled.iframe`
   width: 100%;
@@ -258,23 +264,26 @@ const Video = () => {
             </Buttons>
           </Details>
           <HR />
+
           <Channel>
             <ChannelInfo>
               <ChannelImage src={channel?.img} />
               <ChannelDetails>
                 <ChannelName>{channel?.name}</ChannelName>
                 <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
-                <Description>
-                  {currentVideo?.desc}
-                </Description>
               </ChannelDetails>
             </ChannelInfo>
+
+          </Channel>
+          <Flex>
+            <Description>{currentVideo?.desc}</Description>
+
             <Subscribe onClick={handleSub}>
               {currentUser?.subscribedUsers?.includes(channel?._id)
                 ? 'SUBSCRIBED'
                 : 'SUBSCRIBE'}
             </Subscribe>
-          </Channel>
+          </Flex>
           <HR />
           <Comments videoId={currentVideo._id} />
         </Content>

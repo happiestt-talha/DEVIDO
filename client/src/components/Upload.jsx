@@ -114,11 +114,15 @@ const Upload = ({ setOpen }) => {
     };
 
     useEffect(() => {
+        console.log("Uploading: ", videoPerc);
         video && uploadFile(video, "videoUrl");
+        // eslint-disable-next-line
     }, [video]);
 
     useEffect(() => {
+        console.log("Uploading: ", videoPerc);
         img && uploadFile(img, "imgUrl");
+        // eslint-disable-next-line
     }, [img]);
 
     const handleUpload = async (e) => {

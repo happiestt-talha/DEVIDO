@@ -72,8 +72,8 @@ const Info = styled.div`
 `;
 
 const Card = ({ type, video }) => {
-  const { currentVideo } = useSelector((state) => state.video)
   const [user, setUser] = useState({});
+  
 
   useEffect(() => {
     if (video && video.userId) {
@@ -100,9 +100,9 @@ const Card = ({ type, video }) => {
   return (
     <Link to={`/video/${video._id}`} style={{ textDecoration: "none" }}>
       <Container type={type}>
-        <Image type={type} src={currentVideo.imgUrl ? currentVideo.imgUrl : Dummy} />
+        <Image type={type} src={video.imgUrl ? video.imgUrl : Dummy} />
         <Details type={type}>
-          <ChannelImage type={type} src={Dummy2} />
+          <ChannelImage type={type} src={user.img ? user.img : Dummy2} />
           <Texts>
             <Title>
               {type === "sm" ? "Card Title" : video.title.length > 30 ? video.title.slice(0, 30) + "..." : video.title}

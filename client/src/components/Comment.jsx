@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Dummy from '../images/Dummy.jpg'
 import axios from 'axios'
 
 const Container = styled.div`
@@ -37,16 +36,16 @@ const Comment = ({comment}) => {
   const [channel, setChannel] = useState({});
 
   useEffect(() => {
-    const fetchComment = async () => {
+    const fetchChannel = async () => {
       const res = await axios.get(`/user/find/${comment.userId}`);
       setChannel(res.data)
     };
-    fetchComment();
+    fetchChannel();
   }, [comment.userId]);
   return (
     <>
       <Container>
-        <Avatar src={channel.img || Dummy} />
+        <Avatar src={channel.img || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} />
         <Details>
           <Name>{channel.name}</Name>
           <Text>{comment.desc}</Text>

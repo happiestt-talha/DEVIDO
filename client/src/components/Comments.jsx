@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import Comment from './Comment'
+import { useSelector } from 'react-redux'
 
 
 const Container = styled.div`
@@ -42,25 +43,27 @@ const Button = styled.button`
   }
 `
 const Comments = ({ videoId }) => {
-  //eslint-disable-next-line
+  const { currentUser } = useSelector((state) => state.user)
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
   useEffect(() => {
     const fetchComments = async () => {
       try {
+        console.log('Current User: ', currentUser)
         console.log('Fetching comments...')
         console.log('Video ID: ', videoId)
         const res = await axios.get(`/comment/${videoId}`)
         console.log('Comments: ', res.data)
-        setComments( res.data)
+        setComments(res.data)
       } catch (err) {
         console.log('err: ', err)
       }
     }
     fetchComments()
+    // eslint-disable-next-line
   }, [videoId])
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -70,7 +73,7 @@ const Comments = ({ videoId }) => {
       // console.log('Video ID: ', videoId)
       const res = await axios.post(`/comment`, { desc: comment, videoId: videoId })
       // console.log('Comment res: ', res.data)
-      setComments((prev)=> [...prev, res.data])
+      setComments((prev) => [...prev, res.data])
       setComment('')
     } catch (err) {
       console.log(err)
@@ -86,12 +89,12 @@ const Comments = ({ videoId }) => {
       <Container>
 
         <Wrapper>
-          <Avatar src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+          <Avatar src={currentUser.img || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' } />
           <Input placeholder="Add a comment..." onChange={handleChange} value={comment} />
-        <Button onClick={handleSubmit}>Post</Button>
+          <Button onClick={handleSubmit}>Post</Button>
         </Wrapper>
         {
-        comments.length > 0 &&  comments.map((comment) => (
+          comments.length > 0 && comments.map((comment) => (
             <Comment key={comment._id} comment={comment} />
           ))
         }

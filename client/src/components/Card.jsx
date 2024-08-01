@@ -6,7 +6,6 @@ import Dummy from '../images/Dummy.jpg';
 import Dummy2 from '../images/Dummy2.jpg';
 import axios from "axios";
 import { formatDistanceToNow } from 'date-fns';
-import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "320px"};
@@ -80,7 +79,7 @@ const Card = ({ type, video }) => {
       const fetchUser = async () => {
         try {
           const res = await axios.get(`/user/find/${video.userId}`);
-          console.log(res.data)
+          // console.log('User: ', res.data);
           setUser(res.data);
         } catch (error) {
           console.error('Failed to fetch user:', error);

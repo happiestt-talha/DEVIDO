@@ -101,7 +101,7 @@ const SignIn = () => {
     try {
       const res = await axios.post('/auth/login', { name: details.name, password: details.password })
       dispatch(loginSuccess(res.data))
-      console.log('res: ', res)
+      // console.log('res: ', res)
 
       navigate('/')
     } catch (error) {

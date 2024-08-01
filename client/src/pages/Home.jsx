@@ -16,10 +16,11 @@ const Home = ({ type }) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      console.log('Fetching videos...')
+      // console.log('Fetching videos...')
+      console.log('Name: ', currentUser.name)
       console.log('Current User: ', currentUser)
       const res = await axios.get(`/video/${type}`)
-      console.log('Videos: ', res.data)
+      // console.log('Videos: ', res.data)
       setVideos(res.data)
     }
     fetchVideos()

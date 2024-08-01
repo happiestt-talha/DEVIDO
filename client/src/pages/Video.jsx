@@ -165,7 +165,6 @@ const Flex = styled.div`
   align-items: center;
   /* gap: 0.5rem; */
 `
-
 const VideoFrame = styled.iframe`
   width: 100%;
   height:28rem;
@@ -174,7 +173,9 @@ const VideoFrame = styled.iframe`
     height: 20rem;
   }
 `
+
 const Video = () => {
+
   const path = useLocation().pathname.split("/")[2]
   const dispatch = useDispatch()
 
@@ -220,8 +221,8 @@ const Video = () => {
   }
 
   const handleSub = async () => {
+    dispatch(subscription(channel._id))
     try {
-      dispatch(subscription(channel._id))
       if (currentUser.subscribedUsers.includes(channel._id)) {
         await axios.put(`/user/unsub/${channel._id}`)
       } else {

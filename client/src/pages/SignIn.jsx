@@ -90,7 +90,6 @@ const SignIn = () => {
   })
   const [signUpData, setSignUpData] = useState({
     name: '',
-    name: '',
     email: '',
     password: '',
   })
@@ -110,8 +109,7 @@ const SignIn = () => {
 
     dispatch(loginStart())
     try {
-      const res = await axios.post('/auth/register', {
-        name: signUpData.name,
+      const res = await axios.post('/auth/signup', {
         name: signUpData.name,
         email: signUpData.email,
         password: signUpData.password

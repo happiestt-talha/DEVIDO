@@ -82,9 +82,9 @@ export const getTrend = async (req, res, next) => {
 
 export const getRandom = async (req, res, next) => {
     try {
-        console.log('Fetching random videos...')
+        // console.log('Fetching random videos...')
         const video = await Video.aggregate([{ $sample: { size: 40 } }])
-        console.log('Random video: ', video)
+        // console.log('Random video: ', video)
         res.status(200).json(video)
     } catch (error) {
         next(createError(403, error.message))

@@ -89,7 +89,7 @@ const Comments = ({ videoId }) => {
       <Container>
 
         <Wrapper>
-          <Avatar src={currentUser.img || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' } />
+          <Avatar src={currentUser?.img || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' } />
           <Input placeholder="Add a comment..." onChange={handleChange} value={comment} />
           <Button onClick={handleSubmit}>Post</Button>
         </Wrapper>

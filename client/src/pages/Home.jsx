@@ -15,21 +15,27 @@ const Home = ({ type }) => {
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      // console.log('Fetching videos...')
-      console.log('Name: ', currentUser.name)
-      console.log('Current User: ', currentUser)
-      const res = await axios.get(`/video/${type}`)
-      // console.log('Videos: ', res.data)
-      setVideos(res.data)
+    try {
+      const fetchVideos = async () => {
+        // console.log('Fetching videos...')
+        // console.log('Name: ', currentUser.name)
+        console.log('Current User: ', currentUser)
+        // const res = await axios.get(`/video/${type}`)
+        const res = await axios.get(`/video/${type}`)
+        console.log('Videos: ', res.data)
+        setVideos(res.data)
+      }
+      fetchVideos()
+    } catch (error) {
+      console.log(error)
     }
-    fetchVideos()
     // eslint-disable-next-line
   }, [type])
   return (
     <>
       <Container>
         {
+          // <p>{videos}</p>
           videos.map(video => (
             <Card key={video._id} video={video} />
           ))

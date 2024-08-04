@@ -88,12 +88,40 @@ const SignIn = () => {
     email: '',
     password: '',
   })
+  const [signUpData, setSignUpData] = useState({
+    name: '',
+    name: '',
+    email: '',
+    password: '',
+  })
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleOnChange = (e) => {
-    console.log('OnChange: ', e.target.value)
+    // console.log('OnChange: ', e.target.value)
     setDetails({ ...details, [e.target.name]: e.target.value })
+  }
+  const signUpOnChange = (e) => {
+    setSignUpData({ ...signUpData, [e.target.name]: e.target.value })
+  }
+  const handleSignup = async (e) => {
+    e.preventDefault()
+
+    dispatch(loginStart())
+    try {
+      const res = await axios.post('/auth/register', {
+        name: signUpData.name,
+        name: signUpData.name,
+        email: signUpData.email,
+        password: signUpData.password
+      })
+      dispatch(loginSuccess(res.data))
+      navigate('/')
+    } catch (error) {
+      console.log('Error: ', error)
+      alert(error.response.data.message)
+    }
   }
   const handleLogin = async (e) => {
     dispatch(loginStart())
@@ -142,20 +170,20 @@ const SignIn = () => {
           <Title>Sign in</Title>
           <SubTitle>to continue to YouTube</SubTitle>
           <InputBox>
-            <Input type='text' placeholder='Enter your username' name='name' value={details.name} onChange={handleOnChange} />
+            <Input type='text' placeholder='Enter your name' name='name' value={details.name} onChange={handleOnChange} />
             <Input type='password' placeholder='password' name='password' value={details.password} onChange={handleOnChange} />
           </InputBox>
           <Button onClick={handleLogin}>Sign in</Button>
           <Title>OR</Title>
           <Button onClick={handleGoogleSignin}>Sign in with Google</Button>
           <Title>OR</Title>
-          <Input type='text' placeholder='Enter your username' />
-          <Input type='email' placeholder='Enter your email' />
+          <Input type='text' value={signUpData.name} onChange={signUpOnChange} name='name' placeholder='Enter your name' />
+          <Input type='email' value={signUpData.email} onChange={signUpOnChange} name='email' placeholder='Enter your email' />
           <Flex>
-            <Input type='password' placeholder='password' />
+            <Input type='password' value={signUpData.password} onChange={signUpOnChange} name='password' placeholder='password' />
             <Input type='password' placeholder='confirm password' />
           </Flex>
-          <Button>Sign up</Button>
+          <Button onClick={handleSignup}>Sign up</Button>
         </Wrapper>
       </Container>
     </>

@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
 import SignIn from "./pages/SignIn";
-import Test from "./pages/Test";
-import TestComp from "./components/TestComp";
 import Upload from "./components/Upload";
+import Search from "./pages/Search";
+import Profile from "./pages/Profile";
 
 const Container = styled.div`
   display: flex;
@@ -44,17 +44,14 @@ function App() {
                   <Route path="sub" element={<Home type="sub" />} />
                   <Route path="signin" element={<SignIn />} />
                   <Route path="upload" element={<Upload />} />
-
-                  <Route path="test" element={<TestComp />}>
-                    <Route path=":id" element={<TestComp />} />
-                  </Route>
+                  <Route path="search" element={<Search />} />
+                  <Route path="profile" element={<Profile />} />
 
                   <Route path="video" element={<Video />}>
                     <Route path=":id" element={<Video />} />
                   </Route>
 
                 </Route>
-                <Route path="/test" element={<Test />} />
               </Routes>
             </Wrapper>
           </Main>

@@ -102,7 +102,7 @@ const Card = ({ type, video }) => {
           <ChannelImage type={type} src={user.img ? user.img : Dummy2} />
           <Texts>
             <Title>
-              {video.title}
+              {video.title.length > 30 ? video.title.substring(0, 30) + "..." : video.title}
             </Title>
             <ChannelName type={type}>
               {user.name || "Unknown"}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
@@ -73,19 +73,25 @@ const Img = styled.img`
   background-color: burlywood;
 `
 const Navbar = () => {
-  const [text, setText] = useState('')
+  const [q, setQ] = useState('')
   const { currentUser } = useSelector((state) => state.user);
+
+  const navigate=useNavigate()
   const handleOnchange = (e) => {
-    setText(" ")
-    console.log('Text: ', text)
-    setText(e.target.value)
+    console.log('Q: ', q)
+    setQ(e.target.value)
   };
+
+  const handleSearch = () => {
+    navigate(`/search?q=${q}`)
+    setQ('')
+  }
   return (
     <Container>
       <Wrapper>
         <Search>
-          <Input placeholder="Search" onChange={handleOnchange} value={text} />
-          <IoSearchSharp />
+          <Input placeholder="Search" onChange={handleOnchange} value={q} />
+          <IoSearchSharp onClick={handleSearch } style={{ cursor: "pointer", color: "#3ea6ff" }} />
         </Search>
         {
           currentUser

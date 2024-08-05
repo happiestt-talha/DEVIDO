@@ -72,7 +72,7 @@ export const addView = async (req, res, next) => {
 
 export const getTrend = async (req, res, next) => {
     try {
-        const videos =await Video.find().sort({ views: -1 })
+        const videos = await Video.find().sort({ views: -1 })
         res.status(200).json(videos)
     } catch (error) {
         next(createError(403, error.message))
@@ -128,6 +128,16 @@ export const search = async (req, res, next) => {
         const videos = await Video.find({
             title: { $regex: searchQuery, $options: 'i' }
         })
+        res.status(200).json(videos)
+    } catch (error) {
+        next(createError(403, err.message))
+    }
+}
+
+export const getByUser = async (req, res, next) => {
+    try {
+        const userId = req.params.id
+        const videos = await Video.find({ userId })
         res.status(200).json(videos)
     } catch (error) {
         next(createError(403, err.message))

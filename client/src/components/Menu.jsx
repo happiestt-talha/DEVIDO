@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaFileUpload, FaRegUserCircle } from "react-icons/fa";
 import { IoHomeSharp, IoCompass, IoGameController, IoNewspaperSharp, IoSettings, IoHelpCircleSharp } from "react-icons/io5";
-import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag, MdVideoCall } from "react-icons/md";
+import { MdSubscriptions, MdVideoLibrary, MdHistory, MdOutlineSportsBasketball, MdLibraryMusic, MdLiveTv, MdFlag } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
 import { CgDarkMode, CgLogOff } from "react-icons/cg";
 import logo from '../images/logo.png'
@@ -115,11 +115,6 @@ const Menu = ({ darkMode, setDarkMode }) => {
       title: "Home",
       icon: <IoHomeSharp />,
       link: '/'
-    },
-    {
-      title: "Video",
-      icon: <MdVideoCall />,
-      link: '/video'
     },
     {
       title: "Explore",

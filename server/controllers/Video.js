@@ -93,7 +93,7 @@ export const getRandom = async (req, res, next) => {
 
 export const getSub = async (req, res, next) => {
     try {
-        const user = User.findById(req.user.id)
+        const user = await User.findById(req.user.id)
         if (!user) {
             return next(createError(404, 'User not found'));
         }

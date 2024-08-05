@@ -18,16 +18,17 @@ const Home = ({ type }) => {
     try {
       const fetchVideos = async () => {
         // console.log('Fetching videos...')
-        // console.log('Name: ', currentUser.name)
-        console.log('Current User: ', currentUser)
-        // const res = await axios.get(`/video/${type}`)
+        console.log('Name: ', currentUser.name)
+        console.log('Current User Id: ', currentUser._id)
         const res = await axios.get(`/video/${type}`)
+        // const res = await axios.get(`${type === 'sub' ? '/sub/' + (currentUser?._id) : '/video'}/${type}`)
         console.log('Videos: ', res.data)
         setVideos(res.data)
       }
       fetchVideos()
     } catch (error) {
       console.log(error)
+      alert(error.response.data.message)
     }
     // eslint-disable-next-line
   }, [type])

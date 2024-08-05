@@ -15,7 +15,7 @@ router.get('/find/:id', getVideo)
 router.put('/view/:id', addView)
 router.get('/trend', getTrend)
 router.get('/random', getRandom)
-router.get('/sub/:id', verifyUser, getSub)
+router.get('/sub', verifyUser, getSub)
 
 router.get('/tags',getByTag)
 router.get('/search',search)

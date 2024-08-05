@@ -22,9 +22,13 @@ export const signup = async (req, res, next) => {
         const newUser = new User({ ...req.body, password: hash })
         await newUser.save()
         success = true
-        res.status(200).json({ success, ...newUser._doc })
-        // console.log('Res: ', res)
-        // console.log("New User: ",{ ...newUser-password})
+        const token = jwt.sign({ id: newUser._id }, authKey)
+        res
+            .cookie("accessToken", token, {
+                httpOnly: true
+            })
+            .status(200)
+            .json({ success, ...newUser._doc })
     } catch (err) {
         next(err)
     }
@@ -36,7 +40,7 @@ export const login = async (req, res, next) => {
         const user = await User.findOne({ name: req.body.name })
         if (!user) return next(createError(404, "User not found"))
 
-        const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
+        const isPasswordCorrect = bcrypt.compare(req.body.password, user.password)
         if (!isPasswordCorrect) return next(createError(401, "Illegal credentials"))
 
         // const token = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_KEY)
@@ -62,7 +66,7 @@ export const googleAuth = async (req, res, next) => {
         console.log("user: ", user)
         if (user) {
             const token = jwt.sign({ id: user._id }, authKey);
-            
+
             res
                 .cookie("accessToken", token, {
                     httpOnly: true,

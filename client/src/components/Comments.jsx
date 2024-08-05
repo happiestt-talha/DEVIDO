@@ -49,11 +49,11 @@ const Comments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        console.log('Current User: ', currentUser)
-        console.log('Fetching comments...')
-        console.log('Video ID: ', videoId)
+        // console.log('Current User: ', currentUser)
+        // console.log('Fetching comments...')
+        // console.log('Video ID: ', videoId)
         const res = await axios.get(`/comment/${videoId}`)
-        console.log('Comments: ', res.data)
+        // console.log('Comments: ', res.data)
         setComments(res.data)
       } catch (err) {
         console.log('err: ', err)

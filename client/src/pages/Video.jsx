@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { dislike, fetchStart, fetchSuccess, like } from '../redux/videoSlice'
 import { formatDistanceToNow } from 'date-fns'
 import { subscription } from '../redux/userSlice';
+import Recomendations from '../components/Recomendations';
 
 const Container = styled.div`
   width: 100%;
@@ -289,9 +290,7 @@ const Video = () => {
           <Comments videoId={currentVideo._id} />
         </Content>
         <Reccomendation>
-          {Array.from({ length: 14 }).map((_, index) => (
-            <Card key={index} type="sm" />
-          ))}
+          <Recomendations tags={currentVideo?.tags} />
         </Reccomendation>
       </Container>
     </>

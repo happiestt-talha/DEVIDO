@@ -86,9 +86,7 @@ const Card = ({ type, video }) => {
         }
       };
 
-      if (type !== "sm") {
         fetchUser();
-      }
     }
   }, [video, type]);
 
@@ -104,14 +102,13 @@ const Card = ({ type, video }) => {
           <ChannelImage type={type} src={user.img ? user.img : Dummy2} />
           <Texts>
             <Title>
-              {type === "sm" ? "Card Title" : video.title.length > 30 ? video.title.slice(0, 30) + "..." : video.title}
+              {video.title}
             </Title>
             <ChannelName type={type}>
-              {type === "sm" ? "Channel Name" : user.name || "Unknown"}
+              {user.name || "Unknown"}
             </ChannelName>
             <Info type={type}>
-              {type === "sm" ? "8,000,000 views • 18 days ago" : `${video.views} views • ${formatDistanceToNow(new Date(video.createdAt), { addSuffix: true })}`}
-              {/* {type === "sm" ? "8,000,000 views • 18 days ago" : `${video.views} views • ${video.createdAt}`} */}
+              {`${video.views} views • ${formatDistanceToNow(new Date(video.createdAt), { addSuffix: true })}`}
             </Info>
           </Texts>
         </Details>

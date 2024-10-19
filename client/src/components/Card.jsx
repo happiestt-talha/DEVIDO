@@ -8,7 +8,7 @@ import axios from "axios";
 import { formatDistanceToNow } from 'date-fns';
 
 const Container = styled.div`
-  width: ${(props) => props.type !== "sm" && "320px"};
+  width: ${(props) => props.type !== "sm" && "310px"};
   margin-bottom: ${(props) => (props.type === "sm" ? "10px" : ".8rem")};
   display: ${(props) => props.type === "sm" && "flex"};
   /* background-color: red; */

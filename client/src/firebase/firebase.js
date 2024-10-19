@@ -1,19 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth"
+import { getAnalytics } from "firebase/analytics";
+import { GoogleAuthProvider, getAuth } from 'firebase/auth'
 const firebaseConfig = {
-    apiKey: "AIzaSyBmItkZ6Tt7qAu8J26rBOoNdUHxjeeECJM",
-    authDomain: "deved-ea838.firebaseapp.com",
-    projectId: "deved-ea838",
-    storageBucket: "deved-ea838.appspot.com",
-    messagingSenderId: "597499536630",
-    appId: "1:597499536630:web:ca5cc6575ce624079778d7"
+    apiKey: "AIzaSyDrJjbYM66I741DvjkyiH8Bd0cRZKtySM0",
+    authDomain: "devido-77818.firebaseapp.com",
+    projectId: "devido-77818",
+    storageBucket: "devido-77818.appspot.com",
+    messagingSenderId: "1090295189293",
+    appId: "1:1090295189293:web:ddfde6904ae3aa19b60da4",
+    measurementId: "G-6LR16YNEBP"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase Analytics
-//eslint-disable-next-line
+const analytics = getAnalytics(app);
 
 export const auth = getAuth()
 export const provider = new GoogleAuthProvider()

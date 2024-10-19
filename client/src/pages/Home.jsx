@@ -18,7 +18,8 @@ const Home = ({ type }) => {
     try {
       const fetchVideos = async () => {
         // console.log('Fetching videos...')
-        console.log('Name: ', currentUser.name)
+        console.log('Current User: ', currentUser)
+        console.log('Name: ', currentUser.username)
         console.log('Current User Id: ', currentUser._id)
         const res = await axios.get(`/video/${type}`)
         // const res = await axios.get(`${type === 'sub' ? '/sub/' + (currentUser?._id) : '/video'}/${type}`)

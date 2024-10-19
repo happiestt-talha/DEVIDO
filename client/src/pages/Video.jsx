@@ -178,12 +178,12 @@ const VideoFrame = styled.iframe`
 const Video = () => {
 
   const path = useLocation().pathname.split("/")[2]
+  console.log('path: ', path)
   const dispatch = useDispatch()
 
   const [channel, setChannel] = useState({})
   const { currentVideo } = useSelector((state) => state.video)
   const { currentUser } = useSelector((state) => state.user)
-
   useEffect(() => {
     window.scrollTo(0, 0)
     const fetchVideos = async () => {
@@ -191,8 +191,8 @@ const Video = () => {
       try {
         const videoRes = await axios.get(`/video/find/${path}`);
         const channelRes = await axios.get(`/user/find/${videoRes.data.userId}`);
-        // console.log('videoRes: ', videoRes.data)
-        // console.log('channelRes: ', channelRes.data)
+        console.log('videoRes: ', videoRes.data)
+        console.log('channelRes: ', channelRes.data)
         dispatch(fetchSuccess(videoRes.data))
         // console.log('currentVideo: ', currentVideo)
         setChannel(channelRes.data)
@@ -203,6 +203,7 @@ const Video = () => {
     fetchVideos();
   }, [path, dispatch]);
 
+  
   const handleLike = async () => {
     try {
       dispatch(like(currentUser?._id))
@@ -222,12 +223,12 @@ const Video = () => {
   }
 
   const handleSub = async () => {
-    dispatch(subscription(channel._id))
+    dispatch(subscription(channel?._id))
     try {
-      if (currentUser.subscribedUsers.includes(channel._id)) {
-        await axios.put(`/user/unsub/${channel._id}`)
+      if (currentUser.subscribedUsers.includes(channel?._id)) {
+        await axios.put(`/user/unsub/${channel?._id}`)
       } else {
-        await axios.put(`/user/sub/${channel._id}`)
+        await axios.put(`/user/sub/${channel?._id}`)
       }
     } catch (error) {
       console.error('Failed to subscribe/unsubscribe:', error);
@@ -243,7 +244,7 @@ const Video = () => {
           </VideoWrapper>
           <Title>{currentVideo?.title}</Title>
           <Details>
-            <Info>{currentVideo?.views} views • {formatDistanceToNow(new Date(currentVideo?.createdAt), { addSuffix: true })}</Info>
+            <Info>{currentVideo?.views} views • {new Date(currentVideo?.createdAt).toLocaleDateString()} </Info>
             <Buttons>
               <LButton onClick={handleLike}>
                 {currentVideo?.likes.includes(currentUser?._id)
@@ -287,7 +288,7 @@ const Video = () => {
             </Subscribe>
           </Flex>
           <HR />
-          <Comments videoId={currentVideo._id} />
+          <Comments videoId={currentVideo?._id} />
         </Content>
         <Reccomendation>
           <Recomendations tags={currentVideo?.tags} />

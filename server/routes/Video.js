@@ -21,4 +21,5 @@ router.get('/uploads/:id',getByUser)
 router.get('/tags',getByTag)
 router.get('/search',search)
 
+
 export default router

@@ -72,7 +72,7 @@ const Info = styled.div`
 
 const Card = ({ type, video }) => {
   const [user, setUser] = useState({});
-  
+
 
   useEffect(() => {
     if (video && video.userId) {
@@ -86,7 +86,7 @@ const Card = ({ type, video }) => {
         }
       };
 
-        fetchUser();
+      fetchUser();
     }
   }, [video, type]);
 
@@ -108,7 +108,7 @@ const Card = ({ type, video }) => {
               {user.name || "Unknown"}
             </ChannelName>
             <Info type={type}>
-              {`${video.views} views • ${formatDistanceToNow(new Date(video.createdAt), { addSuffix: true })}`}
+              {`${video.views} views • ${new Date(video.createdAt).toDateString()}`}
             </Info>
           </Texts>
         </Details>
